@@ -16,7 +16,7 @@ export default function Map (){
     }), []);
 
     const onLoad = useCallback((map: GoogleMap) => (mapRef.current = map), []);
-
+    console.log(park)
 
     return (
         <div className='flex h-screen'>
@@ -36,7 +36,7 @@ export default function Map (){
                     onLoad={onLoad}                    
                     mapContainerClassName='map-container'
                 >
-
+                    {park && <Marker position={park}/>}
                 </GoogleMap>
             </div>
         </div>

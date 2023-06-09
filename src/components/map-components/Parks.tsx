@@ -9,7 +9,16 @@ interface ParksProps {
 
 export default function Parks ({setParks}: ParksProps){
     const {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
-    console.log(data);
+
+    const onPlaceSelection = async (value: string) => {
+        setValue(value, false);
+        clearSuggestions();
+        const results = await getGeocode({address: value});
+        const {lat, lng} = await getLatLng(results[0]); 
+        setParks({lat, lng});
+    };
+
+
     return (
         <>
             <div className='w-full flex items-center justify-center'>
@@ -33,17 +42,10 @@ export default function Parks ({setParks}: ParksProps){
                         {data.map((suggestion) => {
                             const {place_id, description} = suggestion;
                             return (
-                                <li key={place_id} className='p-2 hover:bg-slate-200' onClick={async () => {
-                                    setValue(description, false);
-                                    clearSuggestions();
-                                    try {
-                                        const results = await getGeocode({address: description});
-                                        const {lat, lng} = await getLatLng(results[0]);
-                                        setParks({lat, lng});
-                                    } catch (error) {
-                                        console.log(error);
-                                    }
-                                }}>
+                                <li key={place_id} 
+                                    className='p-2 hover:bg-slate-200' 
+                                    onClick={() => onPlaceSelection(description)}
+                                >
                                     {description}
                                 </li>
                             )
