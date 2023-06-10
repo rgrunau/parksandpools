@@ -1,5 +1,5 @@
 import { Marker, InfoWindow } from '@react-google-maps/api';
-import { useSelectedParkStore } from '@/store/added-parks-store';
+import { useSelectedParkStore } from '@/store/selected-park-store';
 import Link from 'next/link';
 
 interface MapMarkerProps {

@@ -1,16 +1,16 @@
 'use client'
 import usePlacesAutocomplete, {getGeocode, getLatLng} from 'use-places-autocomplete';
 import {FaSearch} from 'react-icons/fa';
-
+import {useSelectedParkStore} from '@/store/selected-park-store';
 
 interface ParksProps {
     setParks: (position: google.maps.LatLngLiteral) => void;
     setSelectedPark: (location: google.maps.GeocoderResult) => void;
 }
 
-export default function Parks ({setParks, setSelectedPark}: ParksProps){
+export default function Parks ({setParks}: ParksProps){
     const {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
-
+    const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
     const onPlaceSelection = async (value: string) => {
         setValue(value, false);
         clearSuggestions();
