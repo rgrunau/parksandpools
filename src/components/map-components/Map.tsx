@@ -10,6 +10,7 @@ type Location = google.maps.GeocoderResult;
 
 export default function Map (){
     const [park, setPark] = useState<LatLngLiteral>();
+    const [globalMap, setGlobalMap] = useState<google.maps.Map>();
     const [selectedPark, setSelectedPark] = useState<Location>();
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const mapRef = useRef<google.maps.Map>();
@@ -25,6 +26,7 @@ export default function Map (){
 
     const onLoad = useCallback((map: google.maps.Map) => {
         mapRef.current = map;
+        setGlobalMap(mapRef.current);
         return;
     }, []);
 
