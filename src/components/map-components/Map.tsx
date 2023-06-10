@@ -27,6 +27,8 @@ export default function Map (){
         mapRef.current = map;
         return;
     }, []);
+
+    
     return (
         <div className='flex h-screen'>
             <div className='w-1/5 flex flex-col px-1 py-2 bg-slate-100'>

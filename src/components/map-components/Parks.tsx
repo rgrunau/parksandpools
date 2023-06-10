@@ -24,19 +24,24 @@ export default function Parks ({setParks, setSelectedPark}: ParksProps){
 
     return (
         <>
-            <div className='w-full flex items-center justify-center'>
-                <div className='1/5'>
-                    <FaSearch className='text-slate-700'/>
+            <div className='w-full flex flex-col gap-2 items-center justify-start mt-4'>
+                <div className='w-full pl-2'>
+                    <h1 className='text-2xl font-bold text-slate-700'>Search Parks</h1>
                 </div>
-                <div className='w-4/5 ml-2'>
-                    <input 
-                        className='w-full h-10 p-2 bg-slate-200 text-sm focus:bg-slate-50 focus:border-slate-700 focus:border-2 rounded-md'
-                        type="text" 
-                        placeholder='Search Parks... or something' 
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
-                        disabled={!ready}
-                    />
+                <div className='w-full flex items-center pl-2'>
+                    <div className='1/5'>
+                        <FaSearch className='text-slate-700'/>
+                    </div>
+                    <div className='w-4/5 ml-2'>
+                        <input 
+                            className='w-full h-10 p-2 bg-slate-200 text-sm focus:bg-slate-50 focus:border-slate-700 focus:border-2 rounded-md'
+                            type="text" 
+                            placeholder='Search Parks... or something' 
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
+                            disabled={!ready}
+                        />
+                    </div>
                 </div>
             </div>
             <div className='w-full bg-slate-50'>
