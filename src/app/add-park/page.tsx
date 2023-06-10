@@ -4,7 +4,6 @@ import {useSelectedParkStore} from "@/store/selected-park-store";
 
 export default function AddParkPage() {
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
-    debugger;
     return (
         <div className="w-full w-max-[960px] mx-auto py-5 flex flex-col">
             {selectedPark && (
