@@ -25,3 +25,7 @@ body {
   width: 100%;
   height: 100vh;
 }
+
+.gm-style-iw .gm-style-iw-c {
+  width: 18.75rem !important;
+}

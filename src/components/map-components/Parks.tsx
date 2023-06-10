@@ -5,17 +5,20 @@ import {FaSearch} from 'react-icons/fa';
 
 interface ParksProps {
     setParks: (position: google.maps.LatLngLiteral) => void;
+    setSelectedPark: (location: google.maps.GeocoderResult) => void;
 }
 
-export default function Parks ({setParks}: ParksProps){
+export default function Parks ({setParks, setSelectedPark}: ParksProps){
     const {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
 
     const onPlaceSelection = async (value: string) => {
         setValue(value, false);
         clearSuggestions();
         const results = await getGeocode({address: value});
+        setSelectedPark(results[0]);
         const {lat, lng} = await getLatLng(results[0]); 
         setParks({lat, lng});
+        clearSuggestions();
     };
 
 
