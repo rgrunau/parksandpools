@@ -1,14 +1,14 @@
 import { Marker, InfoWindow } from '@react-google-maps/api';
+import { useSelectedParkStore } from '@/store/selected-park-store';
 import Link from 'next/link';
 
 interface MapMarkerProps {
     position: google.maps.LatLngLiteral;
     onClick?: () => void;
-    selectedPark?: google.maps.GeocoderResult;
     showInfo: boolean;
 }
-export default function MapMarker({position, onClick, selectedPark, showInfo}: MapMarkerProps) {
-    selectedPark && console.log(selectedPark);
+export default function MapMarker({position, onClick, showInfo}: MapMarkerProps) {
+    const selectedPark = useSelectedParkStore(state => state.selectedPark);
     return (
         <>
             <Marker 

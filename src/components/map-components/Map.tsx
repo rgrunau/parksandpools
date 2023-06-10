@@ -2,6 +2,7 @@ import {useState, useRef, useCallback, useMemo} from 'react';
 import { GoogleMap, } from '@react-google-maps/api';
 import Parks from './Parks';
 import MapMarker from './MapMarker';
+import { useSelectedParkStore } from '@/store/selected-park-store';
 
 type LatLngLiteral = google.maps.LatLngLiteral;
 type DirectionsResult = google.maps.DirectionsResult;
@@ -11,7 +12,7 @@ type Location = google.maps.GeocoderResult;
 export default function Map (){
     const [park, setPark] = useState<LatLngLiteral>();
     const [globalMap, setGlobalMap] = useState<google.maps.Map>();
-    const [selectedPark, setSelectedPark] = useState<Location>();
+    const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const mapRef = useRef<google.maps.Map>();
     const center = useMemo<LatLngLiteral>(() => ({lat: 40.7128, lng: -74.0060}), []);
@@ -33,7 +34,7 @@ export default function Map (){
     
     return (
         <div className='flex h-screen'>
-            <div className='w-1/5 flex flex-col px-1 py-2 bg-slate-100'>
+            <div className='w-1/5 flex flex-col px-1 py-2 bg-white'>
                 <div className='w-full'>
                     <Parks 
                         setParks={(position: LatLngLiteral) => {
@@ -57,7 +58,6 @@ export default function Map (){
                         onClick={onMarkerClick} 
                         showInfo={showInfo} 
                         position={park}
-                        selectedPark={selectedPark}
                         />}
                 </GoogleMap>
             </div>
