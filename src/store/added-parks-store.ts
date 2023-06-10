@@ -6,7 +6,6 @@ interface AddedParksStore {
 }
 
 
-//create the store
 export const useSelectedParkStore = create<AddedParksStore>((set, get) => ({
     selectedPark: null,
     setSelectedPark: (park) => set({ selectedPark: park }),

@@ -59,7 +59,6 @@ export default function Map (){
                         onClick={onMarkerClick} 
                         showInfo={showInfo} 
                         position={park}
-                        selectedPark={selectedPark}
                         />}
                 </GoogleMap>
             </div>
