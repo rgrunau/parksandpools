@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
-export const RatingsInput = ({rating, setRating}: {rating: number, setRating: React.Dispatch<React.SetStateAction<number>>}) => (
+ const RatingsInput = ({rating, setRating}: {rating: number, setRating: React.Dispatch<React.SetStateAction<number>>}) => (
     <div className="flex flex-col gap-2">
         <div>
             <label htmlFor="park-description">Park Rating</label>
@@ -19,3 +19,5 @@ export const RatingsInput = ({rating, setRating}: {rating: number, setRating: Re
         </div>
     </div>
 );
+
+export default RatingsInput;
