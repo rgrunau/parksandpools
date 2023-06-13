@@ -14,6 +14,7 @@ export default function MapMarker({position, onClick, showInfo, addParkPage,}: M
     return (
         <>
             <Marker 
+                //@ts-ignore
                 position={position}
                 onClick={onClick}
             >

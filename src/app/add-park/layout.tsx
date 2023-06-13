@@ -44,7 +44,7 @@ export default function AddParkLayout({
                 <div className="w-1/2 p-2 bg-white">
                     {children}
                 </div>
-                <div className="w-1/2 p-2">
+                <div className="w-1/2 overflow-hidden">
                 <GoogleMap
                     zoom={15}
                     center={center}
