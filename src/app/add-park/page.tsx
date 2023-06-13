@@ -4,6 +4,7 @@ import { FormInput } from "@/components/form-components/Input";
 import {useSelectedParkStore} from "@/store/selected-park-store";
 import {RatingsInput}  from "@/components/form-components/ratings-input";
 import PAndPDatePicker from "@/components/form-components/DatePicker";
+import NotesComponent from "@/components/form-components/NotesComponent";
 
 export default function AddParkPage() {
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
@@ -35,6 +36,15 @@ export default function AddParkPage() {
                     />
                     <RatingsInput rating={rating} setRating={() => handleRating} />
                     <PAndPDatePicker/>
+                    <NotesComponent/>
+                    <div>
+                        <button 
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                            type="submit"
+                        >
+                            Add Park
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

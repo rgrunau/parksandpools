@@ -1,3 +1,5 @@
+'use client'
+import { TextField } from "@mui/material";
 
 
 interface FormInputProps {
@@ -17,13 +19,11 @@ export const FormInput = ({
     value,
     id,
 }: FormInputProps):JSX.Element => (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 py-4">
         <div className="w-11/12 flex flex-col gap-2">
             <div className="w-full">
-                <label htmlFor={id}>{label}</label>
-            </div>
-            <div className="w-full">
-                <input 
+                <TextField 
+                    label={label}
                     className="w-11/12 border-2 rounded-md p-2"
                     type={type}
                     id={id} 
