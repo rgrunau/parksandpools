@@ -24,7 +24,7 @@ export const FormInput = ({
             </div>
             <div className="w-full">
                 <input 
-                    className="w-full border-2 border-gray-300 rounded-md p-2"
+                    className="w-11/12 border-2 rounded-md p-2"
                     type={type}
                     id={id} 
                     name={name} 

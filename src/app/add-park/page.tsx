@@ -2,9 +2,8 @@
 import { useState } from "react";
 import { FormInput } from "@/components/form-components/Input";
 import {useSelectedParkStore} from "@/store/selected-park-store";
-import { RatingsInput } from "@/components/form-components/ratings-input";
-
-
+import {RatingsInput}  from "@/components/form-components/ratings-input";
+import PAndPDatePicker from "@/components/form-components/DatePicker";
 
 export default function AddParkPage() {
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
@@ -12,6 +11,7 @@ export default function AddParkPage() {
     const [rating, setRating] = useState(0);
 
     const handleRating = (e: React.ChangeEvent<HTMLInputElement>) => {
+        debugger;
         setRating(Number(e.target.value));
     };
     
@@ -34,6 +34,7 @@ export default function AddParkPage() {
                         id="park-name"
                     />
                     <RatingsInput rating={rating} setRating={() => handleRating} />
+                    <PAndPDatePicker/>
                 </form>
             </div>
         </div>
