@@ -1,17 +1,20 @@
 import { Marker, InfoWindow } from '@react-google-maps/api';
 import { useSelectedParkStore } from '@/store/selected-park-store';
 import Link from 'next/link';
+import { LatLngLiteral } from './Map';
 
 interface MapMarkerProps {
-    position: google.maps.LatLngLiteral;
+    position: LatLngLiteral | google.maps.LatLngLiteral | undefined;
     onClick?: () => void;
     showInfo: boolean;
+    addParkPage?: boolean;
 }
-export default function MapMarker({position, onClick, showInfo}: MapMarkerProps) {
+export default function MapMarker({position, onClick, showInfo, addParkPage,}: MapMarkerProps) {
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
     return (
         <>
             <Marker 
+                //@ts-ignore
                 position={position}
                 onClick={onClick}
             >
@@ -28,12 +31,14 @@ export default function MapMarker({position, onClick, showInfo}: MapMarkerProps)
                                     <p className='text-md'>{selectedPark.formatted_address}</p>
                                 </div>
                                 <div className='p-2 my-1'>
-                                    <Link 
-                                        href={'/add-park'}
-                                        className='bg-pink-400 text-white p-2 rounded-md'
-                                    >
-                                        Add Park
-                                    </Link>
+                                    {!addParkPage && (
+                                        <Link 
+                                            href={'/add-park'}
+                                            className='bg-pink-400 text-white p-2 rounded-md'
+                                        >
+                                            Add Park
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </InfoWindow>
