@@ -16,7 +16,6 @@ export default function Parks ({setParks}: ParksProps){
         clearSuggestions();
         const results = await getGeocode({address: value});
         setSelectedPark(results[0]);
-        console.log(results[0]);
         const {lat, lng} = await getLatLng(results[0]); 
         setParks({lat, lng});
         clearSuggestions();

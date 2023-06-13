@@ -1,10 +1,10 @@
 import { Marker, InfoWindow } from '@react-google-maps/api';
 import { useSelectedParkStore } from '@/store/selected-park-store';
 import Link from 'next/link';
-import AddParkPage from '@/app/add-park/page';
+import { LatLngLiteral } from './Map';
 
 interface MapMarkerProps {
-    position: google.maps.LatLngLiteral;
+    position: LatLngLiteral | google.maps.LatLngLiteral | undefined;
     onClick?: () => void;
     showInfo: boolean;
     addParkPage?: boolean;
