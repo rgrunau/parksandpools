@@ -4,9 +4,9 @@ import Parks from './Parks';
 import MapMarker from './MapMarker';
 import { useSelectedParkStore } from '@/store/selected-park-store';
 
-type LatLngLiteral = google.maps.LatLngLiteral;
+export type LatLngLiteral = google.maps.LatLngLiteral;
 type DirectionsResult = google.maps.DirectionsResult;
-type MapOptions = google.maps.MapOptions;
+export type MapOptions = google.maps.MapOptions;
 type Location = google.maps.GeocoderResult;
 
 export default function Map (){
@@ -55,6 +55,7 @@ export default function Map (){
                     mapContainerClassName='map-container'
                 >
                     {park && <MapMarker 
+                        addParkPage={false}
                         onClick={onMarkerClick} 
                         showInfo={showInfo} 
                         position={park}

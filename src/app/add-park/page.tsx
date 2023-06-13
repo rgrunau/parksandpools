@@ -12,7 +12,6 @@ export default function AddParkPage() {
     const [rating, setRating] = useState(0);
 
     const handleRating = (e: React.ChangeEvent<HTMLInputElement>) => {
-        debugger;
         setRating(Number(e.target.value));
     };
     
