@@ -1,6 +1,6 @@
 import DashboardCard from "@/components/home-components/DashboardCard";
 import Link from "next/link";
-
+import { UserButton } from "@clerk/nextjs";
 
 
 
@@ -21,6 +21,9 @@ export default function Home() {
             >
               Park Lookup
             </Link>
+          </div>
+          <div>
+            <UserButton afterSignOutUrl="/"/>
           </div>
         </div>
         {/* dashboard body */}
