@@ -22,7 +22,6 @@ export default function AddParkLayout({
         disableDefaultUI: true,
     }), []);
     //write better error handling for this
-    if (!selectedPark) return null;
     
 
     const onLoad = useCallback((map: google.maps.Map) => {
@@ -32,11 +31,13 @@ export default function AddParkLayout({
 
     useEffect(() => {
         const fetchData = async () => {
+            //@ts-expect-error
+            //TODO: refactor this to handle null selectedPark
             const {lat, lng} = await getLatLng(selectedPark);
             setParkLocation({lat, lng});
         };
         fetchData();
-    }, [selectedPark]);
+    }, [selectedPark, setParkLocation]);
     
     return (
         <div className="w-full h-screen w-max-11/12 flex justify-center bg-slate-100 p-10">
