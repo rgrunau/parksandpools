@@ -1,5 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// schema.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -9,28 +8,34 @@ generator client {
 datasource db {
   provider = "postgresql"
   url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("NEXT_PUBLIC_POSTGRES_URL_NON_POOLING") // uses a direct connection
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
-model Park {
-  id Int @id @default(autoincrement())
-  name String
-  description String
-  location String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  users User[]
-  notes String
-}
 
-model User{
-  id Int @id @default(autoincrement())
-  email String @unique
-  lastName String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  visitedParks Park[]
+model Park {
+  id            String       @default(cuid()) @id
+  name          String
+  description   String?
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  @@map(name: "parks")
+}
+model VisitedPark {
+  id            String       @default(cuid()) @id
+  parkId        String
+  user          User         @relation(fields: [userId], references: [id])
+  userId        String
+  rating        Int?
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  @@map(name: "visited_parks")
+}
+model User {
+  id            String       @default(cuid()) @id
+  name          String?
+  email         String?   @unique
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  visitedParks  VisitedPark[]
   @@map(name: "users")
 }
-
-
