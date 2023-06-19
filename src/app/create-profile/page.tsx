@@ -1,12 +1,14 @@
 'use client'
+
 import { FormInput } from "@/components/form-components/Input";
 import { useAuth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 
 export default async function CreateProfile() {
     const { userId } = useAuth();
+    const router = useRouter();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const data = new FormData(e.currentTarget);
@@ -18,18 +20,25 @@ export default async function CreateProfile() {
             lastName: formData.lastName,
             email: formData.email,
         }
-
-        const res = await fetch('/api/user', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newUser)
-        }).then(res => res.json()).catch(err => console.log(err));
+        debugger;
+        try {
+            const res = await fetch('/api/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            });
+            if (res.status === 201) {
+                router.push('/dashboard');
+            }
+            if (res.status === 400) {
+                throw new Error('Bad Request');
+            }
+        } catch (error) {
+            console.log(error); 
+        }  
         
-        if (res.status === 200) {
-            redirect('/dashboard');
-        }
     };
     return (
         <div className="w-full max-w-4xl mx-auto p-3">
