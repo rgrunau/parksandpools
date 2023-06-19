@@ -6,7 +6,7 @@ interface FormInputProps {
     name: string;
     label: string;
     type: string;
-    value: string;
+    value?: string;
     id: string;
     placeholder?: string;
 }
