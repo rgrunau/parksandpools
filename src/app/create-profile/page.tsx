@@ -20,7 +20,6 @@ export default async function CreateProfile() {
             lastName: formData.lastName,
             email: formData.email,
         }
-        debugger;
         try {
             const res = await fetch('/api/user', {
                 method: 'POST',
