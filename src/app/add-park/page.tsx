@@ -5,28 +5,37 @@ import {LikeButton}  from "@/components/form-components/like-button";
 import PAndPDatePicker from "@/components/form-components/DatePicker";
 import NotesComponent from "@/components/form-components/NotesComponent";
 import { useRouter } from "next/navigation";
+import { get } from "http";
+import { getLatLng } from "use-places-autocomplete";
+import ts from "typescript";
 
 export default function AddParkPage() {
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
     const [like, setLike] = useState(false);
+    //@ts-ignore
+    const lat = await getLatLng(selectedPark).lat;
+    //@ts-ignore
+    const lng = await getLatLng(selectedPark).lng;
     const handleRating: MouseEventHandler<HTMLButtonElement> = (event) => {
         setLike(!like);
     };
+    const router = useRouter();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const formData = Object.fromEntries(data.entries());
-        const router = useRouter();
         const newPark = {
             name: selectedPark?.address_components[0].long_name,
             address: selectedPark?.formatted_address,
-            lat: selectedPark?.geometry.location.lat,
-            lng: selectedPark?.geometry.location.lng,
-            like: like,
+            lat: lat,
+            lng: lng,
+            liked: like,
             date: formData.date,
             notes: formData.notes
         };
+        debugger;
+
         const res = await fetch('/api/parks', {
             method: 'POST',
             headers: {
@@ -34,7 +43,6 @@ export default function AddParkPage() {
             },
             body: JSON.stringify(newPark)
         });
-        debugger;
         if(res.ok) {
             console.log('park added');
             router.push('/dashboard');
@@ -52,7 +60,7 @@ export default function AddParkPage() {
             <div className=" w-11/12 py-4 mx-auto drop-shadow-md rounded-lg self-start">
                 <form 
                     className="w-11/12 p-2 flex flex-col gap-2 border-2 border-gray-300 rounded-md"
-
+                    onSubmit={handleSubmit}
                 >
                     {selectedPark && (
                         <div className="self-start">

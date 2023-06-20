@@ -1,46 +1,36 @@
-// schema.prisma
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Park {
-  id            String       @default(cuid()) @id
-  name          String
-  description   String?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  @@map(name: "parks")
-}
-model VisitedPark {
-  id            String       @default(cuid()) @id
-  parkId        String     @map(name: "park_id")
-  user          User         @relation(fields: [userId], references: [id])
-  userId        String
-  like          Boolean?
-  lat           Float?
-  long          Float?
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  visits        Int?
-  @@map(name: "visited_parks")
-}
 model User {
-  id            String       @default(cuid()) @id
-  userId        String      @unique
-  firstName     String?
-  lastName      String?
-  email         String?   @unique
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  visitedParks  VisitedPark[]
-  @@map(name: "users")
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  name      String?
+  email     String?  @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model VisitedPark {
+  id       String   @id @default(cuid())
+  userId   String
+  parkId   String
+  parkName String
+  address  String
+  liked    Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  notes    String?
+  lat      Float?
+  lng      Float?
 }

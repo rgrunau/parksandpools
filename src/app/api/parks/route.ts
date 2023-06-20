@@ -1,15 +1,29 @@
 import prisma from "../../../../lib/primsa";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
-export async function Post(req: NextApiRequest) {
+export async function POST(req: Request) {
 
     try {
         const body = await req.body;
-        const park = await prisma.park.create({
-            data: body
+        if(body === null){
+            throw new Error("No body found");
+        }
+        const park = await prisma.visitedPark.create({
+            data: body as any
         });
         debugger;
+        return new NextResponse(JSON.stringify(park), {
+            status: 201,
+            headers: { "Content-Type": "application/json" },
+        });
     } catch (error: any) {
-        
+        if (error.code === "P2002") {
+            return new NextResponse(JSON.stringify({ error: "User already exists" }), { 
+                status: 400, 
+                headers: { "Content-Type": "application/json" },
+            });
+        }
+        console.log(error);
+        return new NextResponse(error.message, { status: 500 });
     }
 }
