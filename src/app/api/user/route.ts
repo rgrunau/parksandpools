@@ -1,4 +1,3 @@
-import { redirect } from "next/dist/server/api-utils";
 import prisma from "../../../../lib/primsa";
 import { NextResponse } from "next/server";
 

@@ -22,12 +22,13 @@ model Park {
 }
 model VisitedPark {
   id            String       @default(cuid()) @id
-  parkId        String
+  parkId        String     @map(name: "park_id")
   user          User         @relation(fields: [userId], references: [id])
   userId        String
-  rating        Int?
+  like          Boolean?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  visits        Int?
   @@map(name: "visited_parks")
 }
 model User {

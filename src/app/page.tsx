@@ -5,7 +5,7 @@ import { currentUser } from "@clerk/nextjs";
 async function getUserInfo(id: string | undefined) {
   const userData = await prisma.user.findUnique({
     where: {
-      id: id
+      userId: id
     },
   })
   return {
@@ -20,6 +20,9 @@ export default async function Home() {
   const userData = user.props.userData
   if (!userData) {
     redirect('/create-profile')
+  }
+  if (userData) {
+    redirect('/dashboard')
   }
   return <div>Home Screen</div>
   

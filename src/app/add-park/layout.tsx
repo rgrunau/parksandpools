@@ -40,7 +40,7 @@ export default function AddParkLayout({
     }, [selectedPark, setParkLocation]);
     
     return (
-        <div className="w-full h-screen w-max-11/12 flex justify-center bg-slate-100 p-10">
+        <div className="w-full h-screen w-max-11/12 flex justify-center p-10">
             <section className="w-full max-w-7xl flex justify-evenly bg-slate-50">
                 <div className="w-1/2 p-2 bg-white">
                     {children}

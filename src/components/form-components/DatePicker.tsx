@@ -9,9 +9,8 @@ export default function PAndPDatePicker(){
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <div className='my-4'>
-
                 <DatePicker
-                    className='w-3/5 border-2 rounded-md'
+                    className='w-full border-2 rounded-md'
                     label="Vist Date"
                 />
             </div>
