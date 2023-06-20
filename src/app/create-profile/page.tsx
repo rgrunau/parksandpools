@@ -1,4 +1,5 @@
 'use client'
+
 import { FormInput } from "@/components/form-components/Input";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
@@ -20,7 +21,6 @@ export default async function CreateProfile() {
             email: formData.email,
         }
         try {
-            debugger;
             const res = await fetch('/api/user', {
                 method: 'POST',
                 headers: {
