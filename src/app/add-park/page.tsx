@@ -5,17 +5,12 @@ import {LikeButton}  from "@/components/form-components/like-button";
 import PAndPDatePicker from "@/components/form-components/DatePicker";
 import NotesComponent from "@/components/form-components/NotesComponent";
 import { useRouter } from "next/navigation";
-import { get } from "http";
 import { getLatLng } from "use-places-autocomplete";
-import ts from "typescript";
-
-export default function AddParkPage() {
+import { useAuth } from "@clerk/nextjs";
+export default async function AddParkPage() {
+    const { userId } = useAuth();
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
     const [like, setLike] = useState(false);
-    //@ts-ignore
-    const lat = await getLatLng(selectedPark).lat;
-    //@ts-ignore
-    const lng = await getLatLng(selectedPark).lng;
     const handleRating: MouseEventHandler<HTMLButtonElement> = (event) => {
         setLike(!like);
     };
@@ -26,12 +21,14 @@ export default function AddParkPage() {
         const data = new FormData(event.currentTarget);
         const formData = Object.fromEntries(data.entries());
         const newPark = {
-            name: selectedPark?.address_components[0].long_name,
+            parkName: selectedPark?.address_components[0].long_name,
             address: selectedPark?.formatted_address,
-            lat: lat,
-            lng: lng,
+            userId: userId,
+            // @ts-ignore
+            lat: await getLatLng(selectedPark).lat,
+            // @ts-ignore
+            lng: await getLatLng(selectedPark).lng,
             liked: like,
-            date: formData.date,
             notes: formData.notes
         };
         debugger;

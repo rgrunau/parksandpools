@@ -14,6 +14,7 @@ export async function POST(request: Request) {
             headers: { "Content-Type": "application/json" },
            });
     } catch (error: any) {
+        console.log(error);
         if (error.code === "P2002") {
             return new NextResponse(JSON.stringify({ error: "User already exists" }), { 
                 status: 400, 

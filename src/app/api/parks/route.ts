@@ -12,10 +12,10 @@ export async function POST(req: Request) {
             data: body as any
         });
         debugger;
-        return new NextResponse(JSON.stringify(park), {
-            status: 201,
+        return new NextResponse(JSON.stringify(park), { 
+            status: 201, 
             headers: { "Content-Type": "application/json" },
-        });
+           });
     } catch (error: any) {
         if (error.code === "P2002") {
             return new NextResponse(JSON.stringify({ error: "User already exists" }), { 
