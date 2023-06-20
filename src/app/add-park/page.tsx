@@ -2,19 +2,47 @@
 import { useState, MouseEventHandler } from "react";
 import {useSelectedParkStore} from "@/store/selected-park-store";
 import {LikeButton}  from "@/components/form-components/like-button";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import PAndPDatePicker from "@/components/form-components/DatePicker";
 import NotesComponent from "@/components/form-components/NotesComponent";
+import { useRouter } from "next/navigation";
 
 export default function AddParkPage() {
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
-    
     const [like, setLike] = useState(false);
-
     const handleRating: MouseEventHandler<HTMLButtonElement> = (event) => {
         setLike(!like);
-      };
+    };
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const formData = Object.fromEntries(data.entries());
+        const router = useRouter();
+        const newPark = {
+            name: selectedPark?.address_components[0].long_name,
+            address: selectedPark?.formatted_address,
+            lat: selectedPark?.geometry.location.lat,
+            lng: selectedPark?.geometry.location.lng,
+            like: like,
+            date: formData.date,
+            notes: formData.notes
+        };
+        const res = await fetch('/api/parks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newPark)
+        });
+        debugger;
+        if(res.ok) {
+            console.log('park added');
+            router.push('/dashboard');
+        }
+        if(!res.ok) {
+            console.log('something went wrong');
+        }
+    };
     
     if (!selectedPark) return null;
     // write an error boundry for this
@@ -22,7 +50,10 @@ export default function AddParkPage() {
         <div className="w-full h-screen w-max-[960px] mx-auto py-5 flex flex-col items-start">
             
             <div className=" w-11/12 py-4 mx-auto drop-shadow-md rounded-lg self-start">
-                <form className=" w-11/12 p-2 flex flex-col gap-2 border-2 border-gray-300 rounded-md">
+                <form 
+                    className="w-11/12 p-2 flex flex-col gap-2 border-2 border-gray-300 rounded-md"
+
+                >
                     {selectedPark && (
                         <div className="self-start">
                             <h1 className="text-2xl">{selectedPark.address_components[0].long_name}</h1>

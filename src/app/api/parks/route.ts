@@ -8,6 +8,7 @@ export async function Post(req: NextApiRequest) {
         const park = await prisma.park.create({
             data: body
         });
+        debugger;
     } catch (error: any) {
         
     }
