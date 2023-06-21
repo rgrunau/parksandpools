@@ -33,8 +33,8 @@ export default function Map (){
 
     
     return (
-        <div className='flex h-screen'>
-            <div className='w-1/5 flex flex-col px-1 py-2 bg-white'>
+        <div className='flex flex-col lg:flex-row h-screen'>
+            <div className='w-full z-10 lg:w-1/5 flex flex-col px-1 py-2 bg-white'>
                 <div className='w-full'>
                     <Parks 
                         setParks={(position: LatLngLiteral) => {
@@ -46,7 +46,7 @@ export default function Map (){
                     />
                 </div>
             </div>
-            <div className='w-4/5 h-screen'>
+            <div className='w-full lg:w-4/5 lg:h-screen'>
                 <GoogleMap
                     zoom={15}
                     center={center}
