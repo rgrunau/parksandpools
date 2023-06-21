@@ -1,25 +1,14 @@
 import DashboardCard from "@/components/home-components/DashboardCard";
 import Link from "next/link";
-import { UserButton, currentUser } from "@clerk/nextjs";
+import { UserButton,  } from "@clerk/nextjs";
 import prisma from "../../../lib/primsa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 
-async function getUserInfo(email: string | undefined) {
-  const userData = await prisma.user.findUnique({
-    where: {
-      email: email
-    },
-  })
-  return {
-    props: {userData},
-    revalidate: 10
-  }
-}
 
 export default async function Dashboard() {
-  const rencentParks = false
-  const loggedInuser = await currentUser()
-  let user = await getUserInfo(loggedInuser?.emailAddresses[0].emailAddress)
+  let rencentParks = await prisma.visitedPark.findMany();
   return (
     <div className="h-screen w-screen flex justify-center p-8 bg-slate-200">
       <div className="w-full w-max-10/12 p-4 flex flex-col items-center bg-slate-50 rounded-lg">
@@ -42,9 +31,6 @@ export default async function Dashboard() {
         </div>
         {/* dashboard body */}
         <div className="w-10/12 flex flex-col items-center justify-between my-4 p-4">
-          <div className="w-full p-2">
-            <h1 className="text-4xl text-slate-700">Welcome {loggedInuser?.firstName}</h1>
-          </div>
           <div className="w-full lg:w-1/2 self-start py-4 px-2">
             <DashboardCard
               cardHeaderText="Recent Parks"
@@ -52,7 +38,24 @@ export default async function Dashboard() {
                 <div>
                     {rencentParks && (
                         <div className="flex flex-col gap-2">
-                        parks
+                          {rencentParks.map((park) => (
+                              <div 
+                                key={park.id}
+                                className="flex w-full gap-2"
+                              >
+                                <div>
+                                  <h2 className="text-xl text-slate-700">{park.parkName}</h2>
+                                </div>
+                                <div>
+                                  {park.liked && (
+                                    <FontAwesomeIcon
+                                      icon={faHeart}
+                                      color="red"
+                                    />
+                                  )}
+                                </div>
+                              </div>
+                          ))}
                         </div>
                     )}
                     {!rencentParks && (

@@ -17,7 +17,7 @@ function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`bg-slate-50 ${inter.className}`}>{children}</body>
+        <body className={`bg-slate-50 min-h-screen ${inter.className}`}>{children}</body>
       </html>
     </ClerkProvider>
   )
