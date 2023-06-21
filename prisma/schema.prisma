@@ -25,6 +25,7 @@ model User {
 model VisitedPark {
   id       String   @id @default(cuid())
   userId   String
+  // this is the place_id from google maps
   parkId   String
   parkName String
   address  String

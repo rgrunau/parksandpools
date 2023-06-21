@@ -2,16 +2,15 @@ import prisma from "../../../../lib/primsa";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-
+    console.log(req.body);
     try {
-        const body = await req.body;
+        const body = await req.json();
         if(body === null){
             throw new Error("No body found");
         }
         const park = await prisma.visitedPark.create({
             data: body as any
         });
-        debugger;
         return new NextResponse(JSON.stringify(park), { 
             status: 201, 
             headers: { "Content-Type": "application/json" },
