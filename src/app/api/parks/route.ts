@@ -2,7 +2,7 @@ import prisma from "../../../../lib/primsa";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-    console.log(req.body);
+    
     try {
         const body = await req.json();
         if(body === null){

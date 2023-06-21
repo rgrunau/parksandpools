@@ -5,6 +5,7 @@ import { useAuth } from '@clerk/nextjs';
 import { getLatLng } from 'use-places-autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { redirect } from 'next/navigation';
 
 export default function AddPark() {
     const { userId } = useAuth();
@@ -32,7 +33,6 @@ export default function AddPark() {
             notes: formData.get('notes'),
             liked: like
         };
-        console.log(newPark);
         const response = await fetch('/api/parks', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -43,6 +43,7 @@ export default function AddPark() {
         }
         if(response.ok) {
             console.log('success');
+            redirect('/dashboard');
         }
     };
 
