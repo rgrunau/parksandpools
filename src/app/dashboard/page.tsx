@@ -1,7 +1,6 @@
 import DashboardCard from "@/components/home-components/DashboardCard";
 import DashboardHeader from "@/components/home-components/DashboardHeader";
 import prisma from "../../../lib/primsa";
-import { UserButton } from "@clerk/nextjs";
 import RecentParkList from "@/components/home-components/RecentParkList";
 import { VisitedPark } from "@prisma/client";
 
@@ -9,12 +8,10 @@ import { VisitedPark } from "@prisma/client";
 
 export default async function Dashboard() {
   let rencentParks = await prisma.visitedPark.findMany() as VisitedPark[];
+
   return (
     <div className="h-screen w-screen flex justify-center lg:p-8 bg-slate-200">
-      <div className="w-full lg:w-10/12 p-4 flex flex-col items-center bg-slate-50 rounded-lg">
-        <div className="w-full flex items-center justify-end">
-          <UserButton />
-        </div>
+      <div className="w-full max-w-[1400px] p-4 flex flex-col items-center bg-slate-50 rounded-lg">
         <DashboardHeader />
         {/* dashboard body */}
         <div className="w-full lg:w-10/12 flex flex-col items-center justify-between my-4 lg:p-4">
