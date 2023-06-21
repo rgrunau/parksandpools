@@ -10,7 +10,6 @@ import { redirect } from 'next/navigation';
 export default function AddPark() {
     const { userId } = useAuth();
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
-    console.log(selectedPark);
     const [like, setLike] = useState<boolean>(false);
     //@ts-ignore
     const { lat, lng } = useMemo(() => getLatLng(selectedPark), [selectedPark]);
