@@ -1,5 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFaceSadTear } from "@fortawesome/free-solid-svg-icons";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { NavList } from "./nav-list";
+import { SignOutButton } from "@clerk/nextjs";
 
 
 interface GlobalNavProps {
@@ -12,7 +15,7 @@ export const GlobalNav = ({setNavOpen, navOpen}: GlobalNavProps) => (
         absolute top-0 left-0 h-screen flex flex-col justify-start items-center`}
     >
         <div className="w-full flex items-center justify-end">
-            <div className="pr-4">
+            <div className="p-4">
                 <button
                     type="button"
                     className="inline-flex items-center justify-center p-2 
@@ -23,18 +26,16 @@ export const GlobalNav = ({setNavOpen, navOpen}: GlobalNavProps) => (
                 </button>
             </div>
         </div>
-        <div className="px-2 pt-2 pb-3">
-            <ul>
-                <li className="px-2 py-1 hover:bg-slate-100 rounded-md text-2xl">
-                    nav item 1
-                </li>
-                <li className="px-2 py-1 hover:bg-slate-100 rounded-md">
-                    nav item 2
-                </li>
-                <li className="px-2 py-1 hover:bg-slate-100 rounded-md">
-                    nav item 3
-                </li>
-            </ul>
-        </div>
+       <NavList />
+       <SignOutButton>
+            <div className="flex items-center p-0 mt-8">
+                <div>
+                    <FontAwesomeIcon icon={faFaceSadTear} className="text-2xl" />
+                </div>
+                <div className="px-2 text-2xl">
+                    Sign Out
+                </div>
+            </div>
+        </SignOutButton>
     </nav>
 );
