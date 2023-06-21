@@ -15,7 +15,7 @@ const GlobalHeader = ({title}: {title:string}) => {
                         <button
                             type="button"
                             className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 
-                            hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-500 md:hidden"
+                            hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-500 "
                             aria-expanded={navOpen}
                             aria-label="Open main menu"
                             onClick={() => setNavOpen(!navOpen)}

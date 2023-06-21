@@ -10,7 +10,7 @@ interface GlobalNavProps {
     navOpen: boolean;
 }
 export const GlobalNav = ({setNavOpen, navOpen}: GlobalNavProps) => (
-    <nav className={`w-screen transition-all duration-500 ease-in-out z-20 
+    <nav className={`w-screen lg:w-96 transition-all duration-500 ease-in-out z-20 
         bg-white ${navOpen ? 'translate-x-0' : '-translate-x-full'}
         absolute top-0 left-0 h-screen flex flex-col justify-start items-center`}
     >
