@@ -26,6 +26,12 @@ body {
   height: 100vh;
 }
 
+.add-park-map-container {
+  width: 100%;
+  height: 18.75rem;
+}
+
 .gm-style-iw .gm-style-iw-c {
   width: 18.75rem !important;
 }
+

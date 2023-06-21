@@ -5,13 +5,10 @@ import MapMarker from './MapMarker';
 import { useSelectedParkStore } from '@/store/selected-park-store';
 
 export type LatLngLiteral = google.maps.LatLngLiteral;
-type DirectionsResult = google.maps.DirectionsResult;
 export type MapOptions = google.maps.MapOptions;
-type Location = google.maps.GeocoderResult;
 
 export default function Map (){
     const [park, setPark] = useState<LatLngLiteral>();
-    const [globalMap, setGlobalMap] = useState<google.maps.Map>();
     const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const mapRef = useRef<google.maps.Map>();
@@ -27,14 +24,13 @@ export default function Map (){
 
     const onLoad = useCallback((map: google.maps.Map) => {
         mapRef.current = map;
-        setGlobalMap(mapRef.current);
         return;
     }, []);
 
     
     return (
-        <div className='flex h-screen'>
-            <div className='w-1/5 flex flex-col px-1 py-2 bg-white'>
+        <div className='flex flex-col lg:flex-row h-screen'>
+            <div className='w-full z-10 lg:w-1/5 flex flex-col px-1 py-2 bg-white'>
                 <div className='w-full'>
                     <Parks 
                         setParks={(position: LatLngLiteral) => {
@@ -46,7 +42,7 @@ export default function Map (){
                     />
                 </div>
             </div>
-            <div className='w-4/5 h-screen'>
+            <div className='w-full lg:w-4/5 lg:h-screen'>
                 <GoogleMap
                     zoom={15}
                     center={center}

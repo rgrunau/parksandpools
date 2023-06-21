@@ -1,11 +1,12 @@
 'use client'
-import { useMemo, useState, FormEvent } from 'react';
+import { useMemo, useState, FormEvent, useCallback } from 'react';
 import { useSelectedParkStore } from '@/store/selected-park-store';
 import { useAuth } from '@clerk/nextjs';
 import { getLatLng } from 'use-places-autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { redirect } from 'next/navigation';
+import AddParkMap from '@/components/add-park/add-park-map';
 
 export default function AddPark() {
     const { userId } = useAuth();
@@ -47,51 +48,58 @@ export default function AddPark() {
     };
 
     return (
-        <div className='w-1/2 h-full bg-white mx-auto p-6 rounded-md'>
-            <h1>Add Park</h1>
-            <form 
-                onSubmit={handleSubmit}
-                className='flex flex-col gap-2'
-            >
-                <div className="flex flex-col">
-                    <h2>{selectedPark?.address_components[0].long_name}</h2>
-                </div>
-                <div className='flex flex-col gap-1'>
-                    <button 
-                        type='button'
-                        onClick={handleLike}
-                        className='flex items-center justify-start'
-                    >
-                        <FontAwesomeIcon
-                            className='w-8 h-8'
-                            color={like ? 'red' : 'gray'}
-                            icon={faHeart}
-                        />
-                    </button>
-                </div>
-                <div className='flex flex-col gap-1'>
-                    <div>
-                        <label htmlFor="notes">Park Notes</label>
+        <div className='w-full lg:w-1/2 h-screen lg:h-full flex flex-col bg-white mx-auto p-6 rounded-md'>
+            <div className='w-full'>
+                <AddParkMap
+                    lat={lat}
+                    lng={lng}
+                />
+            </div>
+            <div className='w-full py-4'>
+                <form 
+                    onSubmit={handleSubmit}
+                    className='flex flex-col gap-2'
+                >
+                    <div className="flex flex-col">
+                        <h1 className='text-xl text-slate-800'>{selectedPark?.address_components[0].long_name}</h1>
                     </div>
-                    <div>
-                        <textarea 
-                            name="notes" 
-                            id="notes" 
-                            className='bg-slate-100 w-96 h-32 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-500 focus:bg-white resize-none'
+                    <div className='flex flex-col gap-1'>
+                        <button 
+                            type='button'
+                            onClick={handleLike}
+                            className='flex items-center justify-start'
                         >
-
-                        </textarea>
-                    </div>
-                    <div>
-                        <button
-                            type='submit'
-                            className='bg-sky-500 text-white rounded-md p-2'
-                        >
-                            Submit
+                            <FontAwesomeIcon
+                                className='w-8 h-8'
+                                color={like ? 'red' : 'gray'}
+                                icon={faHeart}
+                            />
                         </button>
                     </div>
-                </div>
-            </form>
+                    <div className='flex flex-col gap-1'>
+                        <div>
+                            <label htmlFor="notes">Park Notes</label>
+                        </div>
+                        <div>
+                            <textarea 
+                                name="notes" 
+                                id="notes" 
+                                className='bg-slate-100 w-full lg:w-96 h-32 p-2 rounded-md focus:outline-none 
+                                focus:ring-2 focus:ring-slate-500 focus:bg-white resize-none'
+                            >
+                            </textarea>
+                        </div>
+                        <div>
+                            <button
+                                type='submit'
+                                className='bg-sky-500 text-slate-50 rounded-md p-2'
+                            >
+                                Add Park
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
         </div>
     )
