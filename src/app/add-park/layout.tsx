@@ -6,7 +6,7 @@ export default function AddParkLayout ({
   }) {
 
     return (
-        <div className="py-8">
+        <div className=" w-full lg:py-8">
             {children}
         </div>
     )
