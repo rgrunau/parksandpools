@@ -5,13 +5,10 @@ import MapMarker from './MapMarker';
 import { useSelectedParkStore } from '@/store/selected-park-store';
 
 export type LatLngLiteral = google.maps.LatLngLiteral;
-type DirectionsResult = google.maps.DirectionsResult;
 export type MapOptions = google.maps.MapOptions;
-type Location = google.maps.GeocoderResult;
 
 export default function Map (){
     const [park, setPark] = useState<LatLngLiteral>();
-    const [globalMap, setGlobalMap] = useState<google.maps.Map>();
     const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const mapRef = useRef<google.maps.Map>();
@@ -27,7 +24,6 @@ export default function Map (){
 
     const onLoad = useCallback((map: google.maps.Map) => {
         mapRef.current = map;
-        setGlobalMap(mapRef.current);
         return;
     }, []);
 
