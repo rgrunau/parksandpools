@@ -28,11 +28,11 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
     }
     return (
         <form
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-6"
         >
             <div className="w-full">
-                <div className='flex gap-1'>
-                    <div className="w-1/2">
+                <div className='flex gap-6 items-center justify-between mt-4'>
+                    <div className="w-1/4">
                         <button 
                             type='button'
                             onClick={handleLike}
@@ -52,7 +52,7 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
                     />
                 </div>
             </div>
-            <div className="w-full">
+            <div className="w-full mt-4">
                <FormTextArea
                     name='notes'
                     id='notes'

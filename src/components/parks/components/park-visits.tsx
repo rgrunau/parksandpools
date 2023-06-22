@@ -25,7 +25,7 @@ const ParkVisits = ({ visits, addVisit, subtractVisit }: ParkVisitsProps) => (
                     />
                 </button>
             </div>
-            <div>
+            <div className="ml-2">
                 <button
                     type='button'
                     aria-label="add visit"
