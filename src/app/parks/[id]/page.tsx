@@ -1,17 +1,27 @@
-'use client'
+import EditParkForm from "@/components/parks/components/edit-park-form";
+import prisma from "../../../../lib/primsa";
 
-async function getPark (id: string){
-    const res = await fetch(`http:localhost:3000/api/parks/${id}`);
-    return res.json();
-}
 
-export default function Page({params}: {params: {id: string}}) {
-    debugger;
+
+export default async function Page({params}: {params: {id: string}}) {
     const id = params.id;
-    // const park = getPark(id);
+    const park = await prisma.visitedPark.findUnique({
+        where: {
+            id: id
+        }
+    });
+    
+    
     return (
-        <div>
-            My park: {params.id}
-        </div>
+        <section className="w-full h-screen flex flex-col gap-4 py-4 px-4 bg-slate-50">
+            <div>
+                <h1 className="text-2xl">{park?.parkName}</h1>
+            </div>
+            <div>
+                {park && (
+                    <EditParkForm park={park} />
+                )}
+            </div>
+        </section>
     )
 }

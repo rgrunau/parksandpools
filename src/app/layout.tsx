@@ -19,7 +19,7 @@ function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`bg-slate-50 min-h-screen flex flex-col ${openSans.className}`}>
-          <GlobalHeader title={metadata.title} />
+          <GlobalHeader />
           <div>
             {children}
           </div>

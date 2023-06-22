@@ -1,4 +1,4 @@
-import prisma from "../../../../lib/primsa";
+import prisma from "../../../../../lib/primsa";
 import { NextResponse } from "next/server";
 
 
