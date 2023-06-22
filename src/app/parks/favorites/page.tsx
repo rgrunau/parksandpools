@@ -1,3 +1,4 @@
+import ParksCard from "@/components/parks/components/park-cards";
 import prisma from "../../../../lib/primsa";
 
 export default async function FavoriteParks () {
@@ -9,12 +10,9 @@ export default async function FavoriteParks () {
 
 
     return (
-        <div>
+        <div className="py-8">
             {favoriteParks && favoriteParks.map((park) => (
-                <div key={park.id}>
-                    <h2>{park.parkName}</h2>
-                    <p>{park.notes}</p>
-                </div>
+                <ParksCard key={park.id} park={park} />
             ))}
         </div>
     )

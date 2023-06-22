@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import prisma from "../../../lib/primsa";
 import Link from "next/link";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import ParksCard from "@/components/parks/components/park-cards";
 
 export default async function Parks() {
     let parks = await prisma.visitedPark.findMany();
@@ -22,28 +23,7 @@ export default async function Parks() {
             </header>
             <div className="w-full flex flex-col items-center justify-center py-6">
                 {parks && parks.map((park) => (
-                    <Link href={`/parks/${park.id}`} className={`w-full p-2 my-2 drop-shadow-lg rounded-lg border-2 ${park.liked ? 'border-pink-400' :'border-slate-400}'}`}>
-                        <div className="w-full flex flex-col items-center justify-between  py-2">
-                            <div className="w-full flex items-center justify-between">
-                                <div>
-                                    <h2 className="text-lg text-slate-900">{park.parkName}</h2>
-                                </div>
-                                {park.liked && (
-                                    <div>
-                                        <FontAwesomeIcon
-                                            icon={faHeart}
-                                            color="red"
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                            <div>
-                                <p className="text-lg text-slate-800">
-                                    {park.notes}
-                                </p>
-                            </div>
-                        </div>
-                    </Link>
+                   <ParksCard key={park.id} park={park} />
                 ))}
             </div>
         </div>
