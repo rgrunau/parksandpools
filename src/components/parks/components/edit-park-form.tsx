@@ -6,6 +6,7 @@ import { faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import FormTextArea from '@/components/form-components/form-text-area';
 import { VisitedPark } from "@prisma/client";
 import ParkVisits from "./park-visits";
+import { redirect } from "next/navigation";
 
 
 
@@ -26,8 +27,33 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
             setVisits(1);
         }
     }
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log('submit');
+        const formData = new FormData(e.currentTarget);
+        const updatedPark = {
+            liked: like,
+            visits: visits,
+            notes: formData.get('notes')
+        }
+        const response = await fetch(`/api/parks/${park.id}`, {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(updatedPark)
+        });
+
+        if(!response.ok) {
+            console.log('error');
+        }
+        if(response.ok) {
+            console.log('success');
+            redirect('/dashboard');
+        }
+
+    };
     return (
         <form
+            onSubmit={handleSubmit}
             className="flex flex-col gap-6"
         >
             <div className="w-full">
@@ -59,6 +85,26 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
                     value={park.notes}
                />
             </div>
+            <footer className="fixed bottom-2 py-1">
+                <div className="flex items-center justify-evenly">
+                    <div className="flex items-center">
+                        <button 
+                            type="submit"
+                            className="bg-sky-500 text-slate-50 h-10 px-1 py-2 rounded-md"
+                        >
+                            Update Park
+                        </button>
+                    </div>
+                    <div className="flex items-center fixed right-4 pr-2">
+                        <button
+                            type="button" 
+                            className="bg-red-500 text-slate-50 h-10 px-1 py-2 rounded-md"
+                        >
+                            Delete Park
+                        </button>
+                    </div>
+                </div>
+            </footer>
         </form>
     )
 }

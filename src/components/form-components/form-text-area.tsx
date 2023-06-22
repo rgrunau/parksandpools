@@ -5,9 +5,9 @@ interface FormTextAreaProps {
     value?: string | null;
 }
 const FormTextArea = ({name,id,value}: FormTextAreaProps) => (
-    <div className='flex flex-col gap-1'>
+    <div className='flex flex-col gap-2'>
         <div>
-            <label htmlFor={name}>Park Notes</label>
+            <label className="text-xl" htmlFor={name}>Park Notes</label>
         </div>
         <div>
             <textarea 
