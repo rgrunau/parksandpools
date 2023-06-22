@@ -13,7 +13,7 @@ export const routes = [
         icon: faSearch,
     },
     {
-        path: "/favorites", 
+        path: "/parks/favorites", 
         name: "Favorites",
         icon: faHeart,
     },
