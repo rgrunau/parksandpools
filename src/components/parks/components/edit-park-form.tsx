@@ -29,7 +29,6 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
     }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('submit');
         const formData = new FormData(e.currentTarget);
         const updatedPark = {
             liked: like,
