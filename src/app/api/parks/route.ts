@@ -1,6 +1,21 @@
 import prisma from "../../../../lib/primsa";
 import { NextResponse } from "next/server";
 
+export async function GET(req: Request) {
+
+    
+    try {   
+        const parks = await prisma.visitedPark.findMany();
+        return new NextResponse(JSON.stringify(parks), { 
+            status: 200, 
+            headers: { "Content-Type": "application/json" },
+           });
+    } catch (error: any) {
+        console.log(error);
+        return new NextResponse(error.message, { status: 500 });
+    }
+};
+
 export async function POST(req: Request) {
     
     try {
@@ -25,4 +40,4 @@ export async function POST(req: Request) {
         console.log(error);
         return new NextResponse(error.message, { status: 500 });
     }
-}
+};
