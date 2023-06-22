@@ -22,7 +22,7 @@ export default async function Parks() {
             </header>
             <div className="w-full flex flex-col items-center justify-center py-6">
                 {parks && parks.map((park) => (
-                    <Link href={`/park/${park.id}`} className={`w-full p-2 my-2 drop-shadow-lg rounded-lg border-2 ${park.liked ? 'border-pink-400' :'border-slate-400}'}`}>
+                    <Link href={`/parks/${park.id}`} className={`w-full p-2 my-2 drop-shadow-lg rounded-lg border-2 ${park.liked ? 'border-pink-400' :'border-slate-400}'}`}>
                         <div className="w-full flex flex-col items-center justify-between  py-2">
                             <div className="w-full flex items-center justify-between">
                                 <div>

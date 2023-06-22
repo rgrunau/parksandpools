@@ -1,15 +1,17 @@
 'use client'
 
 async function getPark (id: string){
-    const res = await fetch(`/api/parks/${id}`);
+    const res = await fetch(`http:localhost:3000/api/parks/${id}`);
     return res.json();
 }
 
-export default function IndParkPage({params: {id}}: {params: {id: string}}) {
-    const park = getPark(id);
+export default function Page({params}: {params: {id: string}}) {
+    debugger;
+    const id = params.id;
+    // const park = getPark(id);
     return (
         <div>
-            <h1>Individual Park Page</h1>
+            My park: {params.id}
         </div>
     )
 }
