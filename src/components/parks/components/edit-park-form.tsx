@@ -5,6 +5,7 @@ import { faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import FormTextArea from '@/components/form-components/form-text-area';
 import { VisitedPark } from "@prisma/client";
+import ParkVisits from "./park-visits";
 
 
 
@@ -44,39 +45,11 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
                             />
                         </button>
                     </div>
-                    <div className="w-1/2 flex items-center">
-                        <div className="w-1/2 text-xl">
-                            Visits: {visits}
-                        </div>
-                        <div className="flex items-center justify-between w-1/2">
-                            <div>
-                                <button
-                                    type='button'
-                                    aria-label="add visit"
-                                    className='bg-sky-500 text-slate-50 rounded-md p-2'
-                                    onClick={addVisit }
-                                >
-                                    <FontAwesomeIcon
-                                        className='w-6 h-4'
-                                        icon={faPlus}
-                                    />
-                                </button>
-                            </div>
-                            <div>
-                                <button
-                                    type='button'
-                                    aria-label="add visit"
-                                    className='bg-sky-500 text-slate-50 rounded-md p-2'
-                                    onClick={subtractVisit }
-                                >
-                                    <FontAwesomeIcon
-                                        className='w-6 h-4'
-                                        icon={faMinus}
-                                    />
-                                </button>
-                            </div>
-                        </div> 
-                    </div>
+                    <ParkVisits
+                        visits={visits}
+                        addVisit={addVisit}
+                        subtractVisit={subtractVisit}
+                    />
                 </div>
             </div>
             <div className="w-full">
