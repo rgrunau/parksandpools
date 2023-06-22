@@ -34,3 +34,18 @@ export async function PATCH(req: Request,{params}: {params: {id: string}}) {
 
     return NextResponse.json(updatedPark);
 }
+
+export async function DELETE(req: Request,{params}: {params: {id: string}}) {
+    const id = params.id;
+    const deletedPark = await prisma.visitedPark.delete({
+        where: {
+            id
+        }
+    });
+
+    if(!deletedPark){
+        return new NextResponse(JSON.stringify({error: "Park not found"}), {status: 404});
+    }
+
+    return NextResponse.json(deletedPark);
+};

@@ -50,6 +50,20 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
         }
 
     };
+
+    const handleDelete = async () => {
+        const response = await fetch(`/api/parks/${park.id}`, {
+            method: 'DELETE',
+            headers: {'Content-Type': 'application/json'}
+        });
+        if(!response.ok) {
+            console.log('error');
+        }
+        if(response.ok) {
+            console.log('success');
+            redirect('/dashboard');
+        }
+    };
     return (
         <form
             onSubmit={handleSubmit}
@@ -98,6 +112,7 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
                         <button
                             type="button" 
                             className="bg-red-500 text-slate-50 h-10 px-1 py-2 rounded-md"
+                            onClick={handleDelete}
                         >
                             Delete Park
                         </button>
