@@ -7,7 +7,7 @@ import { GlobalNav } from "./global-nav";
 const GlobalHeader = () => {
     const [navOpen, setNavOpen] = useState<boolean>(false)
     return (
-        <div className="flex-grow">
+        <div>
             <header className="w-full h-12 flex items-center justify-start bg-slate-50 text-slate-800">
                 <div className="max-w-7xlpy-6 px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">

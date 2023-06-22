@@ -43,7 +43,7 @@ export default async function CreateProfile() {
         <div className="w-full max-w-4xl mx-auto p-3">
             <form 
                 onSubmit={handleSubmit}
-                className="bg-white shadow-md max-w-md mx-auto rounded px-8 pt-6 pb-8 my-4"
+                className="bg-white shadow-md max-w-md mx-auto rounded px-8 pb-8 my-4"
             >
                 <div className="w-full max-w-xs">
                     <h1 className="text-2xl">Create Profile</h1>
