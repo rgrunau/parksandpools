@@ -4,9 +4,11 @@ import { useAuth } from "@clerk/nextjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { GlobalNav } from "./global-nav";
+import { useGlobalNavigationStore } from "@/store/global-navigation-store";
 
 const GlobalHeader = () => {
-    const [navOpen, setNavOpen] = useState<boolean>(false)
+    const navOpen = useGlobalNavigationStore(state => state.isNavOpen);
+    const setNavOpen = useGlobalNavigationStore(state => state.toggleNav);
     const { isSignedIn  } = useAuth();
     return (
         <div>
@@ -20,7 +22,7 @@ const GlobalHeader = () => {
                                 hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-500 "
                                 aria-expanded={navOpen}
                                 aria-label="Open main menu"
-                                onClick={() => setNavOpen(!navOpen)}
+                                onClick={setNavOpen}
                             >
                                 <FontAwesomeIcon icon={faBars} className="text-2xl text-pink-500" />
                             </button>

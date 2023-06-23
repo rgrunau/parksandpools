@@ -5,13 +5,17 @@ import { useAuth } from '@clerk/nextjs';
 import { getLatLng } from 'use-places-autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import AddParkMap from '@/components/add-park/add-park-map';
 import FormTextArea from '@/components/form-components/form-text-area';
 
+
+
 export default function AddPark() {
     const { userId } = useAuth();
+    const router = useRouter();
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
+
     const [like, setLike] = useState<boolean>(false);
     //@ts-ignore
     const { lat, lng } = useMemo(() => getLatLng(selectedPark), [selectedPark]);
@@ -25,7 +29,7 @@ export default function AddPark() {
         const formData = new FormData(e.currentTarget);
         const newPark = {
             userId: userId,
-            parkName: selectedPark?.address_components[0].long_name,
+            parkName: selectedPark?.parkName,
             address: selectedPark?.formatted_address,
             //this is the place_id from google maps
             parkId: selectedPark?.place_id,
@@ -44,7 +48,7 @@ export default function AddPark() {
         }
         if(response.ok) {
             console.log('success');
-            redirect('/dashboard');
+            router.push('/dashboard');
         }
     };
 
@@ -62,7 +66,7 @@ export default function AddPark() {
                     className='flex flex-col gap-2'
                 >
                     <div className="flex flex-col">
-                        <h1 className='text-xl text-slate-800'>{selectedPark?.address_components[0].long_name}</h1>
+                        <h1 className='text-xl text-slate-800'>{selectedPark?.parkName}</h1>
                     </div>
                     <div className='flex flex-col gap-1'>
                         <button 

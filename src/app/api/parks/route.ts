@@ -1,11 +1,16 @@
 import prisma from "../../../../lib/primsa";
 import { NextResponse } from "next/server";
+import { currentUser } from "@clerk/nextjs";
 
 export async function GET(req: Request) {
 
-    
+    const user = await currentUser();
     try {   
-        const parks = await prisma.visitedPark.findMany();
+        const parks = await prisma.visitedPark.findMany({
+            where: {
+                userId: user?.id
+            },
+        });
         return new NextResponse(JSON.stringify(parks), { 
             status: 200, 
             headers: { "Content-Type": "application/json" },

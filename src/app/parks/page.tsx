@@ -1,11 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import prisma from "../../../lib/primsa";
-import Link from "next/link";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import ParksCard from "@/components/parks/components/park-cards";
-
+import { currentUser } from "@clerk/nextjs";
 export default async function Parks() {
-    let parks = await prisma.visitedPark.findMany();
+    const user = await currentUser();
+    let parks = await prisma.visitedPark.findMany({
+        where: {
+            userId: user?.id
+        },
+    });
     return (
         <div className="w-full lg:max-w-[1400px] py-4 px-6 mb-6">
             <header>
