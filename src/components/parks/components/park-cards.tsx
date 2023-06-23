@@ -22,8 +22,8 @@ const ParksCard = ({park }: ParksCardProps) => (
                     </div>
                 )}
             </div>
-            <div>
-                <p className="text-lg text-slate-800">
+            <div className="w-full">
+                <p className="text-lg text-slate-800 text-left">
                     {park.notes}
                 </p>
             </div>
