@@ -9,12 +9,13 @@ import { useRouter } from 'next/navigation';
 import AddParkMap from '@/components/add-park/add-park-map';
 import FormTextArea from '@/components/form-components/form-text-area';
 
+
+
 export default function AddPark() {
     const { userId } = useAuth();
     const router = useRouter();
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
 
-    console.log(selectedPark);
     const [like, setLike] = useState<boolean>(false);
     //@ts-ignore
     const { lat, lng } = useMemo(() => getLatLng(selectedPark), [selectedPark]);

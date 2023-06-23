@@ -3,14 +3,18 @@ import { useSelectedParkStore } from '@/store/selected-park-store';
 import Link from 'next/link';
 import { LatLngLiteral } from './Map';
 
+
+
+
 interface MapMarkerProps {
     position: LatLngLiteral | google.maps.LatLngLiteral | undefined;
     onClick?: () => void;
     showInfo: boolean;
     addParkPage?: boolean;
 }
-export default function MapMarker({position, onClick, showInfo, addParkPage,}: MapMarkerProps) {
+export default async function MapMarker({position, onClick, showInfo, addParkPage,}: MapMarkerProps) {
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
+  
     return (
         <>
             <Marker 
@@ -34,7 +38,7 @@ export default function MapMarker({position, onClick, showInfo, addParkPage,}: M
                                     {!addParkPage && (
                                         <Link 
                                             href={'/add-park'}
-                                            className='bg-pink-400 text-white p-2 rounded-md'
+                                            className='bg-pink-400 text-slate-50 p-2 rounded-md'
                                         >
                                             Add Park
                                         </Link>
