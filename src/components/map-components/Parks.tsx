@@ -17,11 +17,11 @@ export default function Parks ({setParks}: ParksProps){
         setValue(value, false);
         clearSuggestions();
         const results = await getGeocode({address: value});
-        const placeObject = {
-            parkName: name,
-            ...results[0]
-        };
-        setSelectedPark(placeObject);
+        // const placeObject = {
+        //     parkName: name,
+        //     ...results[0]
+        // };
+        setSelectedPark(results[0]);
         const {lat, lng} = await getLatLng(results[0]); 
         setParks({lat, lng});
         clearSuggestions();
