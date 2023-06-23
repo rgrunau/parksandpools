@@ -1,6 +1,6 @@
 import './globals.css'
 import {  Open_Sans } from 'next/font/google'
-import { ClerkProvider } from '@clerk/nextjs'
+import { ClerkProvider  } from '@clerk/nextjs'
 import GlobalHeader from '../components/global-components/global-header'
 const openSans = Open_Sans({ subsets: ['latin'] })
 
