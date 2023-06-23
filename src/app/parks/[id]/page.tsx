@@ -2,12 +2,11 @@ import EditParkForm from "@/components/parks/components/edit-park-form";
 import prisma from "../../../../lib/primsa";
 
 
-
 export default async function Page({params}: {params: {id: string}}) {
     const id = params.id;
     const park = await prisma.visitedPark.findUnique({
         where: {
-            id: id
+            id: id,
         }
     });
     
