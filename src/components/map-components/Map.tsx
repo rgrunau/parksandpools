@@ -21,7 +21,7 @@ export default function Map (){
         setShowInfo(!showInfo);
     };
 
-
+    console.log('map rendered');
     const onLoad = useCallback((map: google.maps.Map) => {
         mapRef.current = map;
         return;

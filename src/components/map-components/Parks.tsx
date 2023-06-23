@@ -1,4 +1,5 @@
 'use client'
+import { useMemo } from 'react';
 import usePlacesAutocomplete, {getGeocode, getLatLng} from 'use-places-autocomplete';
 import {FaSearch} from 'react-icons/fa';
 import {SelectedPark, useSelectedParkStore} from '@/store/selected-park-store';
@@ -13,19 +14,19 @@ export default function Parks ({setParks}: ParksProps){
 
     const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
 
-    const onPlaceSelection = async (value: string, name: string) => {
+    const onPlaceSelection = useMemo(() => async (value: string, name: string) => {
         setValue(value, false);
         clearSuggestions();
         const results = await getGeocode({address: value});
-        // const placeObject = {
-        //     parkName: name,
-        //     ...results[0]
-        // };
-        setSelectedPark(results[0]);
+        const placeObject = {
+            parkName: name,
+            ...results[0]
+        };
+        setSelectedPark(placeObject);
         const {lat, lng} = await getLatLng(results[0]); 
         setParks({lat, lng});
         clearSuggestions();
-    };
+    }, [setValue, clearSuggestions, getGeocode, setSelectedPark, setParks, getLatLng]);
 
 
     return (
