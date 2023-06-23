@@ -1,21 +1,26 @@
 'use client'
+
 import usePlacesAutocomplete, {getGeocode, getLatLng} from 'use-places-autocomplete';
 import {FaSearch} from 'react-icons/fa';
-import {useSelectedParkStore} from '@/store/selected-park-store';
+import { useSelectedParkStore} from '@/store/selected-park-store';
 
 interface ParksProps {
     setParks: (position: google.maps.LatLngLiteral) => void;
-    setSelectedPark: (location: google.maps.GeocoderResult) => void;
 }
 
 export default function Parks ({setParks}: ParksProps){
     const {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
+
     const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
-    const onPlaceSelection = async (value: string) => {
+
+    const onPlaceSelection  = async (value: string, name: string) => {
         setValue(value, false);
-        clearSuggestions();
         const results = await getGeocode({address: value});
-        setSelectedPark(results[0]);
+        const placeObject = {
+            parkName: name,
+            ...results[0]
+        };
+        setSelectedPark(placeObject);
         const {lat, lng} = await getLatLng(results[0]); 
         setParks({lat, lng});
         clearSuggestions();
@@ -49,11 +54,11 @@ export default function Parks ({setParks}: ParksProps){
                 {status === 'OK' && (
                     <ul className='w-full px-1 py-4'>
                         {data.map((suggestion) => {
-                            const {place_id, description} = suggestion;
+                            const {place_id, description, structured_formatting} = suggestion;
                             return (
                                 <li key={place_id} 
                                     className='p-2 bg-white hover:bg-pink-500 hover:text-white' 
-                                    onClick={() => onPlaceSelection(description)}
+                                    onClick={() => onPlaceSelection(description, structured_formatting.main_text)}
                                 >
                                     {description}
                                 </li>

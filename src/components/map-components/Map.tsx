@@ -1,22 +1,19 @@
-import {useState, useRef, useCallback, useMemo} from 'react';
+import {useState, useRef, useCallback, useMemo, useEffect} from 'react';
 import { GoogleMap, } from '@react-google-maps/api';
 import Parks from './Parks';
 import MapMarker from './MapMarker';
-import { useSelectedParkStore } from '@/store/selected-park-store';
 
 export type LatLngLiteral = google.maps.LatLngLiteral;
 export type MapOptions = google.maps.MapOptions;
 
 export default function Map (){
     const [park, setPark] = useState<LatLngLiteral>();
-    const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const mapRef = useRef<google.maps.Map>();
-    const center = useMemo<LatLngLiteral>(() => ({lat: 40.7128, lng: -74.0060}), []);
+    const center = useMemo<LatLngLiteral>(() => ({lat: 47.6038, lng: -122.33010}), []);
     const options = useMemo<MapOptions>(() => ({
         disableDefaultUI: true,
     }), []);
-
 
     const onMarkerClick = () => {
         setShowInfo(!showInfo);
@@ -26,8 +23,12 @@ export default function Map (){
         mapRef.current = map;
         return;
     }, []);
-
-    console.log('park', park);
+    console.log('park outside useEffect ' + park);
+    useEffect(() => {
+        if(!park) return;
+        setPark(park);
+        console.log('park changed ' + park);
+    }, [park]);
     
     return (
         <div className='flex flex-col lg:flex-row h-screen'>
@@ -39,24 +40,25 @@ export default function Map (){
                         if(mapRef.current) {
                             mapRef.current.panTo(position);
                         }}}
-                        setSelectedPark={setSelectedPark}
                     />
                 </div>
             </div>
             <div className='w-full lg:w-4/5 lg:h-screen'>
                 <GoogleMap
-                    zoom={15}
+                    zoom={16}
                     center={center}
                     options={options}
                     onLoad={onLoad}                    
                     mapContainerClassName='map-container'
                 >
-                    {park && <MapMarker 
+                    {park && (
+                        <MapMarker 
                         addParkPage={false}
                         onClick={onMarkerClick} 
                         showInfo={showInfo} 
                         position={park}
-                        />}
+                        />
+                    )}
                 </GoogleMap>
             </div>
         </div>
