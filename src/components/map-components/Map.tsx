@@ -12,7 +12,7 @@ export default function Map (){
     const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const mapRef = useRef<google.maps.Map>();
-    const center = useMemo<LatLngLiteral>(() => ({lat: 40.7128, lng: -74.0060}), []);
+    const center = useMemo<LatLngLiteral>(() => ({lat: 47.6038, lng: -122.33010}), []);
     const options = useMemo<MapOptions>(() => ({
         disableDefaultUI: true,
     }), []);
@@ -44,7 +44,7 @@ export default function Map (){
             </div>
             <div className='w-full lg:w-4/5 lg:h-screen'>
                 <GoogleMap
-                    zoom={15}
+                    zoom={16}
                     center={center}
                     options={options}
                     onLoad={onLoad}                    

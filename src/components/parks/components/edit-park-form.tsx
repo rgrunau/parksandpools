@@ -6,12 +6,12 @@ import { faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import FormTextArea from '@/components/form-components/form-text-area';
 import { VisitedPark } from "@prisma/client";
 import ParkVisits from "./park-visits";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 
 export default function EditParkForm({park}: {park: VisitedPark}) {
-
+    const router = useRouter();
     const [like, setLike] = useState<boolean>(park.liked);
     const [visits , setVisits] = useState<number>(park.visits || 1);
     const handleLike = () => {
@@ -46,7 +46,7 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
         }
         if(response.ok) {
             console.log('success');
-            redirect('/dashboard');
+            router.push('/dashboard');
         }
 
     };
@@ -61,7 +61,7 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
         }
         if(response.ok) {
             console.log('success');
-            redirect('/dashboard');
+            router.push('/dashboard');
         }
     };
     return (
