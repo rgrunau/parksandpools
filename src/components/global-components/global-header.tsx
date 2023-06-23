@@ -7,11 +7,11 @@ import { GlobalNav } from "./global-nav";
 
 const GlobalHeader = () => {
     const [navOpen, setNavOpen] = useState<boolean>(false)
-    const { isSignedIn } = useAuth();
+    const { isSignedIn  } = useAuth();
     return (
         <div>
             {isSignedIn && (
-                <header className="w-full h-12 flex items-center justify-start bg-slate-50 text-slate-800">
+                <header className="w-full h-12 flex items-center justify-betwee bg-slate-50 text-slate-800">
                     <div className="max-w-7xlpy-6 px-4 sm:px-6 lg:px-8">
                         <div className="flex items-center justify-between h-16">
                             <button
@@ -28,6 +28,9 @@ const GlobalHeader = () => {
                         {navOpen && (
                             <GlobalNav setNavOpen={setNavOpen} navOpen={navOpen} /> 
                         )}
+                    </div>
+                    <div>
+                        {/* <h1 className="text-lg font-bold text-pink-500">Hello ${}</h1> */}
                     </div>
                 </header>
             )}
