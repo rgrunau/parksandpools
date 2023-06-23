@@ -1,32 +1,25 @@
 'use client'
-import { useMemo } from 'react';
 import usePlacesAutocomplete, {getGeocode, getLatLng} from 'use-places-autocomplete';
 import {FaSearch} from 'react-icons/fa';
-import {SelectedPark, useSelectedParkStore} from '@/store/selected-park-store';
+import {useSelectedParkStore} from '@/store/selected-park-store';
 
 interface ParksProps {
     setParks: (position: google.maps.LatLngLiteral) => void;
-    setSelectedPark: (location: SelectedPark) => void;
+    setSelectedPark: (location: google.maps.GeocoderResult) => void;
 }
 
 export default function Parks ({setParks}: ParksProps){
     const {ready, value, setValue, suggestions: {status, data}, clearSuggestions} = usePlacesAutocomplete();
-
     const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
-
-    const onPlaceSelection = useMemo(() => async (value: string, name: string) => {
+    const onPlaceSelection = async (value: string) => {
         setValue(value, false);
         clearSuggestions();
         const results = await getGeocode({address: value});
-        const placeObject = {
-            parkName: name,
-            ...results[0]
-        };
-        setSelectedPark(placeObject);
+        setSelectedPark(results[0]);
         const {lat, lng} = await getLatLng(results[0]); 
         setParks({lat, lng});
         clearSuggestions();
-    }, [setValue, clearSuggestions, getGeocode, setSelectedPark, setParks, getLatLng]);
+    };
 
 
     return (
@@ -56,11 +49,11 @@ export default function Parks ({setParks}: ParksProps){
                 {status === 'OK' && (
                     <ul className='w-full px-1 py-4'>
                         {data.map((suggestion) => {
-                            const {place_id, description, structured_formatting} = suggestion;
+                            const {place_id, description} = suggestion;
                             return (
                                 <li key={place_id} 
                                     className='p-2 bg-white hover:bg-pink-500 hover:text-white' 
-                                    onClick={() => onPlaceSelection(description, structured_formatting.main_text)}
+                                    onClick={() => onPlaceSelection(description)}
                                 >
                                     {description}
                                 </li>

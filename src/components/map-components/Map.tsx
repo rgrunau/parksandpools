@@ -12,21 +12,22 @@ export default function Map (){
     const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const mapRef = useRef<google.maps.Map>();
-    const center = useMemo<LatLngLiteral>(() => ({lat: 47.6038, lng: -122.33010}), []);
+    const center = useMemo<LatLngLiteral>(() => ({lat: 40.7128, lng: -74.0060}), []);
     const options = useMemo<MapOptions>(() => ({
         disableDefaultUI: true,
     }), []);
+
 
     const onMarkerClick = () => {
         setShowInfo(!showInfo);
     };
 
-    console.log('map rendered');
     const onLoad = useCallback((map: google.maps.Map) => {
         mapRef.current = map;
         return;
     }, []);
 
+    console.log('park', park);
     
     return (
         <div className='flex flex-col lg:flex-row h-screen'>
@@ -44,7 +45,7 @@ export default function Map (){
             </div>
             <div className='w-full lg:w-4/5 lg:h-screen'>
                 <GoogleMap
-                    zoom={16}
+                    zoom={15}
                     center={center}
                     options={options}
                     onLoad={onLoad}                    

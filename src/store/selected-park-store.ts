@@ -1,12 +1,8 @@
 import {create} from "zustand";
 
-
-export interface SelectedPark extends google.maps.GeocoderResult {
-    parkName: string;
-}
 interface AddedParksStore {
-    selectedPark: SelectedPark | null;
-    setSelectedPark: (park: SelectedPark) => void;
+    selectedPark: google.maps.GeocoderResult | null;
+    setSelectedPark: (park: google.maps.GeocoderResult) => void;
 }
 
 
