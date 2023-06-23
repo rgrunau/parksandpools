@@ -24,12 +24,6 @@ export default async function Dashboard() {
         <div className="w-full lg:w-10/12 flex flex-col items-center justify-between my-4 lg:p-4">
           <div className="w-full lg:w-1/2 self-start py-4 gap-2">
             <DashboardCard
-              cardHeaderText="Your Favorite Parks"
-              renderCardBody={() => (
-                <FavoriteParks  />
-              )}
-            />
-            <DashboardCard
               cardHeaderText="Recent Parks"
               renderCardBody={() => (
                 <div>
@@ -43,6 +37,12 @@ export default async function Dashboard() {
                         </div>
                     )}
                 </div>
+              )}
+            />
+             <DashboardCard
+              cardHeaderText="Your Favorite Parks"
+              renderCardBody={() => (
+                <FavoriteParks  />
               )}
             />
           </div>

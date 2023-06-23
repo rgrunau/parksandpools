@@ -15,7 +15,7 @@ const DashboardHeader = async () => {
             <div className="justify-self-end">
                 <Link 
                     href="/park-lookup"
-                    className="bg-sky-500 text-white px-4 py-2 rounded-md"
+                    className="bg-pink-500 text-white px-4 py-2 rounded-md"
                 >
                     Park Lookup
                 </Link>

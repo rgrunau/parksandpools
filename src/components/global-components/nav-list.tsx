@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { MouseEventHandler } from "react";
 import { routes } from "@/consts/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
