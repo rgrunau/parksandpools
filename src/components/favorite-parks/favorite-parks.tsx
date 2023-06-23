@@ -1,4 +1,5 @@
 import prisma from "../../../lib/primsa";
+import ParksCard from "../parks/components/park-cards";
 
 
 export default async function FavoriteParks() {
@@ -10,16 +11,12 @@ export default async function FavoriteParks() {
 
 
     return (
-        <>
+        <div className="px-2 py-4">
             {favoriteParks && (
-                <div className="flex flex-col gap-2">
-                    <ul>
-                        {favoriteParks.map((park) => (
-                            <li>
-                                <h2 className="text-2xl text-slate-700">{park.parkName}</h2>
-                            </li>
-                        ))}
-                    </ul>
+                <div className="w-11/12 flex flex-col gap-2">
+                    {favoriteParks.map((park) => (
+                        <ParksCard park={park} key={park.id} />
+                    ))}
                 </div>
             )}
             {!favoriteParks && (
@@ -28,6 +25,6 @@ export default async function FavoriteParks() {
                     <h3>Go to a park</h3>
                 </div>
             )}
-        </>
+        </div>
     )
 }

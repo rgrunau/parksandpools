@@ -22,7 +22,7 @@ const GlobalHeader = () => {
                                 aria-label="Open main menu"
                                 onClick={() => setNavOpen(!navOpen)}
                             >
-                                <FontAwesomeIcon icon={faBars} className="text-2xl text-slate-900" />
+                                <FontAwesomeIcon icon={faBars} className="text-2xl text-pink-500" />
                             </button>
                         </div>
                         {navOpen && (
