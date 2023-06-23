@@ -2,6 +2,7 @@
 import usePlacesAutocomplete, {getGeocode, getLatLng} from 'use-places-autocomplete';
 import {FaSearch} from 'react-icons/fa';
 import {useSelectedParkStore} from '@/store/selected-park-store';
+import { useEffect } from 'react';
 
 interface ParksProps {
     setParks: (position: google.maps.LatLngLiteral) => void;
@@ -20,6 +21,8 @@ export default function Parks ({setParks}: ParksProps){
         setParks({lat, lng});
         clearSuggestions();
     };
+
+  
 
 
     return (
