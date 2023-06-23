@@ -8,6 +8,7 @@ export const NavList = () => (
            {routes.map((route, index) => (
                 <li key={index}>
                     <Link 
+                        key={index}
                         href={route.path}
                         className="flex items-center px-3 py-2 text-2xl font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50"
                     >

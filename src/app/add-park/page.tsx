@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { redirect } from 'next/navigation';
 import AddParkMap from '@/components/add-park/add-park-map';
+import FormTextArea from '@/components/form-components/form-text-area';
 
 export default function AddPark() {
     const { userId } = useAuth();
@@ -76,27 +77,17 @@ export default function AddPark() {
                             />
                         </button>
                     </div>
-                    <div className='flex flex-col gap-1'>
-                        <div>
-                            <label htmlFor="notes">Park Notes</label>
-                        </div>
-                        <div>
-                            <textarea 
-                                name="notes" 
-                                id="notes" 
-                                className='bg-slate-100 w-full lg:w-96 h-32 p-2 rounded-md focus:outline-none 
-                                focus:ring-2 focus:ring-slate-500 focus:bg-white resize-none'
-                            >
-                            </textarea>
-                        </div>
-                        <div>
-                            <button
-                                type='submit'
-                                className='bg-sky-500 text-slate-50 rounded-md p-2'
-                            >
-                                Add Park
-                            </button>
-                        </div>
+                    <FormTextArea
+                        name='notes'
+                        id='notes'
+                    />
+                    <div>
+                        <button
+                            type='submit'
+                            className='bg-sky-500 text-slate-50 rounded-md p-2'
+                        >
+                            Add Park
+                        </button>
                     </div>
                 </form>
             </div>

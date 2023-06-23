@@ -1,4 +1,4 @@
-import { faHome, faHeart, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faHeart, faSearch, faLocation } from "@fortawesome/free-solid-svg-icons";
 export const libraries: ("places" | "drawing" | "geometry" | "localContext" | "visualization")[] = ["places"];
 
 export const routes = [
@@ -13,7 +13,12 @@ export const routes = [
         icon: faSearch,
     },
     {
-        path: "/favorites", 
+        path: "/parks",
+        name: "All Parks",
+        icon: faLocation,
+    },
+    {
+        path: "/parks/favorites", 
         name: "Favorites",
         icon: faHeart,
     },

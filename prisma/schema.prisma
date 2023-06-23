@@ -35,4 +35,5 @@ model VisitedPark {
   notes    String?
   lat      Float?
   lng      Float?
+  visits   Int?     @default(1)
 }

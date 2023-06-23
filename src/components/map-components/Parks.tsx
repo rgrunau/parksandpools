@@ -24,15 +24,15 @@ export default function Parks ({setParks}: ParksProps){
 
     return (
         <>
-            <div className='w-full flex flex-col gap-2 items-center justify-start mt-4'>
+            <div className='w-full flex flex-col gap-2 items-center justify-center lg:justify-start mt-4'>
                 <div className='w-full pl-2'>
-                    <h1 className='text-2xl font-bold text-pink-500'>Search Parks</h1>
+                    <h1 className='text-3xl font text-pink-500'>Search Parks</h1>
                 </div>
                 <div className='w-full flex items-center pl-2'>
                     <div className='1/5'>
                         <FaSearch className='text-slate-700'/>
                     </div>
-                    <div className='w-4/5 ml-2'>
+                    <div className='w-full lg:w-4/5 mx-auto lg:ml-2 p-2'>
                         <input 
                             className='w-full h-10 p-2 bg-slate-200 text-sm 
                             focus:bg-slate-50 focus:border-slate-700 focus:text-pink-500 focus:border-2 rounded-md'
@@ -48,7 +48,7 @@ export default function Parks ({setParks}: ParksProps){
             <div className='w-full bg-slate-50'>
                 {status === 'OK' && (
                     <ul className='w-full px-1 py-4'>
-                        {data.filter((suggestion) => suggestion.types.includes("park")).map((suggestion) => {
+                        {data.map((suggestion) => {
                             const {place_id, description} = suggestion;
                             return (
                                 <li key={place_id} 

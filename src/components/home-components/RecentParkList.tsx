@@ -11,17 +11,18 @@ const RecentParkList = ({parks}: RecentParkListProps) => (
         {parks.map((park) => (
             <div 
             key={park.id}
-            className="flex w-full gap-2"
+            className="flex items-center w-full gap-2"
             >
             <div>
-                <h2 className="text-xl text-slate-700">{park.parkName}</h2>
+                <h2 className="text-2xl text-slate-700">{park.parkName}</h2>
             </div>
-                <div>
+                <div className="pl-2">
                     {park.liked && (
-                    <FontAwesomeIcon
-                        icon={faHeart}
-                        color="red"
-                    />
+                        <FontAwesomeIcon
+                            icon={faHeart}
+                            color="red"
+                            className="text-2xl"
+                        />
                     )}
                 </div>
             </div>
