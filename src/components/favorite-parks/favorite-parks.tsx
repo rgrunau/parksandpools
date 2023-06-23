@@ -11,7 +11,7 @@ export default async function FavoriteParks() {
 
 
     return (
-        <div className="px-2 py-4">
+        <div className="w-full flex flex-col items-center justify-center py-6">
             {favoriteParks && (
                 <div className="w-11/12 flex flex-col gap-2">
                     {favoriteParks.map((park) => (
