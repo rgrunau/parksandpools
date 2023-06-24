@@ -4,11 +4,17 @@ import prisma from "../../../lib/primsa";
 import RecentParkList from "@/components/home-components/RecentParkList";
 import { VisitedPark } from "@prisma/client";
 import FavoriteParks from "@/components/favorite-parks/favorite-parks";
+import { currentUser } from "@clerk/nextjs";
 
 
 
 export default async function Dashboard() {
-  let rencentParks = await prisma.visitedPark.findMany() as VisitedPark[];
+  const user = await currentUser();
+  let rencentParks = await prisma.visitedPark.findMany({
+    where: {
+      userId: user?.id
+    }
+  }) as VisitedPark[];
   const sortedParks = rencentParks.sort((a, b) => {
     if (a.createdAt > b.createdAt) {
       return -1;
