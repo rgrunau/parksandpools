@@ -7,7 +7,7 @@ import { GlobalNav } from "./global-nav";
 
 const GlobalHeader = () => {
     const [navOpen, setNavOpen] = useState<boolean>(false)
-    const { isSignedIn  } = useAuth();
+    const { isSignedIn } = useAuth();
     return (
         <div>
             {isSignedIn && (
@@ -30,7 +30,6 @@ const GlobalHeader = () => {
                         )}
                     </div>
                     <div>
-                        {/* <h1 className="text-lg font-bold text-pink-500">Hello ${}</h1> */}
                     </div>
                 </header>
             )}
