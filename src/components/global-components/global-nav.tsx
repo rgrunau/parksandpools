@@ -26,7 +26,7 @@ export const GlobalNav = ({setNavOpen, navOpen}: GlobalNavProps) => (
                 </button>
             </div>
         </div>
-       <NavList />
+       <NavList/>
        <SignOutButton>
             <div className="flex items-center p-0 mt-8">
                 <div>
