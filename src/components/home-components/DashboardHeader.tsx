@@ -18,7 +18,7 @@ const DashboardHeader = async () => {
                 <h1 className="text-xl text-slate-800">Hello, {user?.firstName?.charAt(0).toLocaleUpperCase()}{user?.firstName?.slice(1)}</h1>
             </div>
             <div>
-                <h2 className="text-lg text-slate-600">You've been to: {count} parks</h2>
+                <h2 className="text-lg text-slate-600">{`You've been to: ${count} parks`}</h2>
             </div>
         </div>  
     );
