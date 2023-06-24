@@ -1,18 +1,20 @@
 'use client'
-import { useState } from "react";
+import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { GlobalNav } from "./global-nav";
+import { useGlobalNavigationStore } from "@/store/global-nav-store";
 
 const GlobalHeader = () => {
-    const [navOpen, setNavOpen] = useState<boolean>(false)
-    const { isSignedIn  } = useAuth();
+    const navOpen = useGlobalNavigationStore(state => state.isNavOpen);
+    const toggleNav = useGlobalNavigationStore(state => state.toggleNav);
+    const { isSignedIn } = useAuth();
     return (
         <div>
             {isSignedIn && (
-                <header className="w-full h-12 flex items-center justify-betwee bg-slate-50 text-slate-800">
-                    <div className="max-w-7xlpy-6 px-4 sm:px-6 lg:px-8">
+                <header className="w-full h-[100px] py-8 flex items-center justify-betwee bg-white text-slate-800">
+                    <div className="w-full max-w-7xlpy-6 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
                         <div className="flex items-center justify-between h-16">
                             <button
                                 type="button"
@@ -20,17 +22,27 @@ const GlobalHeader = () => {
                                 hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-500 "
                                 aria-expanded={navOpen}
                                 aria-label="Open main menu"
-                                onClick={() => setNavOpen(!navOpen)}
+                                onClick={toggleNav}
                             >
-                                <FontAwesomeIcon icon={faBars} className="text-2xl text-pink-500" />
+                                <FontAwesomeIcon icon={faBars} className="text-3xl text-pink-500" />
                             </button>
                         </div>
                         {navOpen && (
-                            <GlobalNav setNavOpen={setNavOpen} navOpen={navOpen} /> 
+                            <GlobalNav setNavOpen={toggleNav} navOpen={navOpen} /> 
                         )}
-                    </div>
-                    <div>
-                        {/* <h1 className="text-lg font-bold text-pink-500">Hello ${}</h1> */}
+                        <div>
+                            <div>
+                                <Link 
+                                    href="/park-lookup"
+                                    className="p-4 rounded-md"
+                                >
+                                    <FontAwesomeIcon 
+                                        className="text-3xl text-pink-500"
+                                        icon={faMagnifyingGlass} 
+                                    />
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </header>
             )}
