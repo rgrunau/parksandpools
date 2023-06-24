@@ -18,7 +18,7 @@ export default async function Dashboard() {
   })
   return (
     <div className="min-h-screen w-screen flex justify-center lg:p-8 bg-slate-200">
-      <div className="w-full max-w-[1400px] px-4 flex flex-col items-center bg-slate-50 rounded-lg">
+      <div className="w-full max-w-[1400px] px-4 flex flex-col items-center bg-white rounded-lg">
         <DashboardHeader />
         {/* dashboard body */}
         <div className="w-full lg:w-10/12 flex flex-col items-center justify-between my-4 lg:p-4">
