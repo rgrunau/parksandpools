@@ -22,20 +22,22 @@ export const GlobalNav = ({setNavOpen, navOpen}: GlobalNavProps) => (
                     focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-500"
                     onClick={() => setNavOpen(!navOpen)}
                 >
-                    <FontAwesomeIcon icon={faClose} className="text-3xl text-slate-900" />
+                    <FontAwesomeIcon icon={faClose} className="text-3xl text-primary-red" />
                 </button>
             </div>
         </div>
        <NavList/>
-       <SignOutButton>
-            <div className="flex items-center p-0 mt-8">
-                <div>
-                    <FontAwesomeIcon icon={faFaceSadTear} className="text-2xl" />
+       <div className="justify-start">
+        <SignOutButton>
+                <div className="flex p-0 pb-2 fixed bottom-0 right-4 cursor-pointer">
+                    <div>
+                        <FontAwesomeIcon icon={faFaceSadTear} className="text-2xl" />
+                    </div>
+                    <div className="px-2 text-3xl">
+                        Sign Out
+                    </div>
                 </div>
-                <div className="px-2 text-2xl">
-                    Sign Out
-                </div>
-            </div>
-        </SignOutButton>
+            </SignOutButton>
+       </div>
     </nav>
 );

@@ -1,8 +1,8 @@
 import './globals.css'
-import {  Open_Sans } from 'next/font/google'
+import {  Open_Sans, Neucha } from 'next/font/google'
 import { ClerkProvider  } from '@clerk/nextjs'
 import GlobalHeader from '../components/global-components/global-header'
-const openSans = Open_Sans({ subsets: ['latin'] })
+const neucha = Neucha({ weight:['400'], subsets: ['latin'] })
 
 export const metadata = {
   title: 'Parks and Pools',
@@ -20,7 +20,7 @@ function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`bg-slate-50 min-h-screen flex flex-col ${openSans.className}`}>
+        <body className={`bg-slate-50 min-h-screen flex flex-col ${neucha.className}`}>
           <GlobalHeader />
           <div>
             {children}

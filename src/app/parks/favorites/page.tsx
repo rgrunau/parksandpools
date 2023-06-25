@@ -29,7 +29,7 @@ export default async function FavoritesPage() {
                     </div>
                     <div className="w-[250px] py-4">
                         <Link 
-                            className="text-slate-50 bg-pink-500 py-2 px-1 rounded-lg flex justify-center items-center gap-2"
+                            className="text-slate-50 bg-primary-blue py-2 px-1 rounded-lg flex justify-center items-center gap-2"
                             href="/park-lookup"
                         >
                             
