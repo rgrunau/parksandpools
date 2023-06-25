@@ -2,7 +2,6 @@ import './globals.css'
 import {  Open_Sans, Neucha } from 'next/font/google'
 import { ClerkProvider  } from '@clerk/nextjs'
 import GlobalHeader from '../components/global-components/global-header'
-const openSans = Open_Sans({ subsets: ['latin'] })
 const neucha = Neucha({ weight:['400'], subsets: ['latin'] })
 
 export const metadata = {
