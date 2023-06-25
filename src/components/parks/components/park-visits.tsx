@@ -16,7 +16,7 @@ const ParkVisits = ({ visits, addVisit, subtractVisit }: ParkVisitsProps) => (
                 <button
                     type='button'
                     aria-label="add visit"
-                    className='bg-sky-500 text-slate-50 rounded-md p-2'
+                    className='bg-primary-blue text-slate-50 rounded-md p-2'
                     onClick={addVisit }
                 >
                     <FontAwesomeIcon
@@ -29,7 +29,7 @@ const ParkVisits = ({ visits, addVisit, subtractVisit }: ParkVisitsProps) => (
                 <button
                     type='button'
                     aria-label="add visit"
-                    className='bg-sky-500 text-slate-50 rounded-md p-2'
+                    className='bg-primary-blue text-slate-50 rounded-md p-2'
                     onClick={subtractVisit }
                 >
                     <FontAwesomeIcon

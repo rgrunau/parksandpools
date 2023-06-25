@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 import FormTextArea from '@/components/form-components/form-text-area';
 import { VisitedPark } from "@prisma/client";
@@ -9,9 +9,7 @@ import ParkVisits from "./park-visits";
 import { redirect } from "next/navigation";
 
 
-
 export default function EditParkForm({park}: {park: VisitedPark}) {
-
     const [like, setLike] = useState<boolean>(park.liked);
     const [visits , setVisits] = useState<number>(park.visits || 1);
     const handleLike = () => {
@@ -103,7 +101,7 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
                     <div className="flex items-center">
                         <button 
                             type="submit"
-                            className="bg-sky-500 text-slate-50 h-10 px-1 py-2 rounded-md"
+                            className="bg-primary-blue text-slate-50 text-lg p-4  rounded-md"
                         >
                             Update Park
                         </button>
@@ -111,7 +109,7 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
                     <div className="flex items-center fixed right-4 pr-2">
                         <button
                             type="button" 
-                            className="bg-red-500 text-slate-50 h-10 px-1 py-2 rounded-md"
+                            className="bg-primary-red text-slate-50 text-lg p-4 rounded-md"
                             onClick={handleDelete}
                         >
                             Delete Park

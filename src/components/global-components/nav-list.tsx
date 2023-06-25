@@ -24,10 +24,10 @@ export const NavList = () => {
                         role="link"
                         key={index}
                         onClick={handleNavClick(route.path)}
-                        className="flex items-center px-3 py-2 text-2xl font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50"
+                        className="flex items-center px-3 py-2 text-3xl font-medium text-primary-green hover:text-slate-900 hover:bg-slate-50"
                     >
                         <div>
-                            <FontAwesomeIcon icon={route.icon} className="text-2xl" />
+                            <FontAwesomeIcon icon={route.icon} className="text-3xl text-primary-green" />
                         </div>
                         <div className="px-2">
                             {route.name}
