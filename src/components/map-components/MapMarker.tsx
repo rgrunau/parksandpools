@@ -11,6 +11,7 @@ interface MapMarkerProps {
 }
 export default function MapMarker({position, onClick, showInfo, addParkPage,}: MapMarkerProps) {
     const selectedPark = useSelectedParkStore(state => state.selectedPark);
+    console.log(selectedPark);
     return (
         <>
             <Marker 
@@ -25,7 +26,7 @@ export default function MapMarker({position, onClick, showInfo, addParkPage,}: M
                         >
                             <div className='p-1 w-[300px] flex flex-col items-start gap-2'>
                                 <div className='w-full px-4'>
-                                    <h2 className='text-lg'>{selectedPark.address_components[0].long_name}</h2>
+                                    <h2 className='text-lg font-semibold text-primary-green'>{selectedPark.name}</h2>
                                 </div>
                                 <div className='w-full px-4 my-1'>
                                     <p className='text-md'>{selectedPark.formatted_address}</p>
@@ -34,7 +35,7 @@ export default function MapMarker({position, onClick, showInfo, addParkPage,}: M
                                     {!addParkPage && (
                                         <Link 
                                             href={'/add-park'}
-                                            className='bg-pink-400 text-white p-2 rounded-md'
+                                            className='bg-primary-blue text-white p-2 rounded-md'
                                         >
                                             Add Park
                                         </Link>
