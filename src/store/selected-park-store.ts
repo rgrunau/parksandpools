@@ -1,7 +1,7 @@
 import {create} from "zustand";
 
 
-interface SelectedPark extends google.maps.GeocoderResult {
+export interface SelectedPark extends google.maps.GeocoderResult {
     name: string;
 
 }
