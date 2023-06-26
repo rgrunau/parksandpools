@@ -1,4 +1,4 @@
-import {useState, useRef, useCallback, useMemo} from 'react';
+import {useState, useRef, useCallback, useMemo, useEffect} from 'react';
 import { GoogleMap, } from '@react-google-maps/api';
 import Parks from './Parks';
 import MapMarker from './MapMarker';
@@ -9,6 +9,7 @@ export type MapOptions = google.maps.MapOptions;
 
 export default function Map (){
     const [park, setPark] = useState<LatLngLiteral>();
+    const [userLocation, setUserLocation] = useState<LatLngLiteral>();
     const setSelectedPark = useSelectedParkStore(state => state.setSelectedPark);
     const [showInfo, setShowInfo] = useState<boolean>(false);
     const mapRef = useRef<google.maps.Map>();
@@ -17,10 +18,25 @@ export default function Map (){
         disableDefaultUI: true,
     }), []);
 
+    console.log(userLocation)
 
     const onMarkerClick = () => {
         setShowInfo(!showInfo);
     };
+
+    useEffect(() => {
+        if(!navigator.geolocation) {
+            console.log('Geolocation is not supported by your browser');
+        }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                setUserLocation({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                });
+            });
+        }
+    }, []);
 
     const onLoad = useCallback((map: google.maps.Map) => {
         mapRef.current = map;
@@ -45,7 +61,7 @@ export default function Map (){
             <div className='w-full lg:w-4/5 lg:h-screen'>
                 <GoogleMap
                     zoom={15}
-                    center={center}
+                    center={userLocation? userLocation : center }
                     options={options}
                     onLoad={onLoad}                    
                     mapContainerClassName='map-container'
