@@ -1,22 +1,11 @@
-import prisma from "../../../../lib/primsa"
-import { getClerkUser } from "../../../../lib/get-clerk-user"
-import { redirect } from "next/navigation";
 import ParksCard from "@/components/parks/components/park-cards";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { getFavoriteParks } from "../../../../lib/get-user-parks";
 
 export default async function FavoritesPage() {
-   const user = await getClerkUser();
-   if (!user) {
-       redirect("/sign-in")
-    }
-    const favorites = await prisma.visitedPark.findMany({
-        where: {
-            liked: true,
-            userId: user?.id
-        }
-    })
+    const favorites = await getFavoriteParks();
 
     return (
         <div className="flex flex-col">
