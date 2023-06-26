@@ -1,15 +1,8 @@
-import prisma from "../../../lib/primsa";
 import ParksCard from "../parks/components/park-cards";
-import { currentUser } from "@clerk/nextjs";
+import { getFavoriteParks } from "../../../lib/get-user-parks";
 
 export default async function FavoriteParks() {
-    const user = await currentUser();
-    const favoriteParks = await prisma.visitedPark.findMany({
-        where: {
-            liked: true,
-            userId: user?.id
-        }
-    });
+   const favoriteParks = await getFavoriteParks();
 
 
     return (

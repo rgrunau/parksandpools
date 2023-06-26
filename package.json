@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "npx prisma generate && build",
     "start": "next start",
+    "test": "react-script test --env=jsdom --watchAll=false",
     "lint": "next lint"
   },
   "dependencies": {
@@ -43,8 +44,11 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.2",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
     "prisma": "^4.15.0"
   }
 }
