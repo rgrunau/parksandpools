@@ -1,10 +1,11 @@
 import prisma from "../../../../lib/primsa"
-import { getClerkUser } from "../../../../lib/getClerkUser"
+import { getClerkUser } from "../../../../lib/get-clerk-user"
 import { redirect } from "next/navigation";
 import ParksCard from "@/components/parks/components/park-cards";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
 export default async function FavoritesPage() {
    const user = await getClerkUser();
    if (!user) {

@@ -1,27 +1,13 @@
 import DashboardCard from "@/components/home-components/DashboardCard";
 import DashboardHeader from "@/components/home-components/DashboardHeader";
-import prisma from "../../../lib/primsa";
 import RecentParkList from "@/components/home-components/RecentParkList";
-import { VisitedPark } from "@prisma/client";
 import FavoriteParks from "@/components/favorite-parks/favorite-parks";
-import { currentUser } from "@clerk/nextjs";
-
+import { getAllUserParks } from "../../../lib/get-user-parks";
 
 
 export default async function Dashboard() {
-  const user = await currentUser();
-  let rencentParks = await prisma.visitedPark.findMany({
-    where: {
-      userId: user?.id
-    }
-  }) as VisitedPark[];
-  const sortedParks = rencentParks.sort((a, b) => {
-    if (a.createdAt > b.createdAt) {
-      return -1;
-    } else {
-      return 1;
-    }
-  })
+ const recentParks = await getAllUserParks();
+  
   return (
     <div className="min-h-screen w-screen flex justify-center lg:p-8 bg-slate-200">
       <div className="w-full max-w-[1400px] px-4 flex flex-col items-center bg-white rounded-lg">
@@ -39,10 +25,10 @@ export default async function Dashboard() {
               cardHeaderText="Recent Parks"
               renderCardBody={() => (
                 <div>
-                    {rencentParks && (
-                        <RecentParkList parks={sortedParks} />
+                    {recentParks && (
+                        <RecentParkList parks={recentParks} />
                     )}
-                    {!rencentParks && (
+                    {!recentParks && (
                         <div>
                           <h2 className="text-xl text-slate-700">No Recent Parks</h2>
                           <h3>Go to a park</h3>
