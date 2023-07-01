@@ -14,7 +14,7 @@ const FormTextArea = ({name,id,value}: FormTextAreaProps) => (
                 name={name} 
                 id={id} 
                 className='bg-slate-100 w-full lg:w-96 h-32 p-2 rounded-md focus:outline-none 
-                focus:ring-2 focus:ring-slate-500 focus:bg-white resize-none'
+                focus:ring-2 focus:ring-slate-500 focus:bg-white resize-none text-slate-800'
                 defaultValue={value || ''}
             >
             </textarea>

@@ -59,7 +59,7 @@ export default function Parks ({setParks}: ParksProps){
                             console.log(suggestion);
                             return (
                                 <li key={place_id} 
-                                    className='p-2 bg-white hover:bg-primary-green hover:text-white text-xl' 
+                                    className='p-2 bg-white text-slate-800 text-xl' 
                                     onClick={() => onPlaceSelection(description, structured_formatting.main_text)}
                                 >
                                     {description}
