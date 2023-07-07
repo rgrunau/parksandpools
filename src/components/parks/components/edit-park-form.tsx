@@ -7,6 +7,7 @@ import FormTextArea from '@/components/form-components/form-text-area';
 import { VisitedPark } from "@prisma/client";
 import ParkVisits from "./park-visits";
 import { useRouter } from "next/navigation";
+import EdtiParkFooter from "./edit-park-footer";
 
 
 export default function EditParkForm({park}: {park: VisitedPark}) {
@@ -68,8 +69,8 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
             onSubmit={handleSubmit}
             className="flex flex-col gap-6"
         >
-            <div className="w-full">
-                <div className='flex gap-6 items-center justify-between mt-4'>
+            <div className="w-full xl:w-2/3 mx-auto flex flex-col items-center">
+                <div className='w-full flex gap-6 items-center justify-between mt-4'>
                     <div className="w-1/4">
                         <button 
                             type='button'
@@ -97,27 +98,7 @@ export default function EditParkForm({park}: {park: VisitedPark}) {
                     value={park.notes}
                />
             </div>
-            <footer className="fixed bottom-2 py-1">
-                <div className="flex items-center justify-evenly">
-                    <div className="flex items-center">
-                        <button 
-                            type="submit"
-                            className="bg-primary-blue text-slate-50 text-lg p-4  rounded-md"
-                        >
-                            Update Park
-                        </button>
-                    </div>
-                    <div className="flex items-center fixed right-4 pr-2">
-                        <button
-                            type="button" 
-                            className="bg-primary-red text-slate-50 text-lg p-4 rounded-md"
-                            onClick={handleDelete}
-                        >
-                            Delete Park
-                        </button>
-                    </div>
-                </div>
-            </footer>
+            <EdtiParkFooter handleDelete={handleDelete} />
         </form>
     )
 }
